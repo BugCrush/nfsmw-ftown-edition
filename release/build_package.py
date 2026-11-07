@@ -34,10 +34,15 @@ FTOWN_DATA = ["ftown-barriers.bun", "ftown-barriers-drag.bun", "ftown-barriers-s
               "ftown-city.bun", "ftown-connect.bin", "ftown-connector.bun", "ftown-evening.bin", "ftown-events.json",
               "ftown-icons.bun", "ftown-minimap.bun", "ftown-roadnet.bin", "ftown-smackables.bun", "ftown-traffic.json"]
 PLUGINS = ["InputBridge.asi", "InputBridge.ini", "MusicBridge.asi", "MusicBridge.ini", "VisualBridge.asi",
-           "VisualBridge.ini", "ReflectRate.asi", "ReflectRate.ini", "PatchMap.asi"]
+           "VisualBridge.ini", "ReflectRate.asi", "ReflectRate.ini"]
+# Plugins taken from the repo's build instead of the game's scripts folder: InputBridge with the default-layout patch
+# ([Controls] DefaultLayout, 2026-11-07; stand-in tested in input/tests/default-layout.py), newer than the game's copy.
+PLUGIN_SOURCES = {"InputBridge.asi": os.path.join(REPO, "input", "src", "InputBridge.asi")}
 
-FORBIDDEN_NAMES = ("gfxprobe", "worldprobe", "exittrace", "fpsrecorder", "musicprobe", "ftowntimes", "ftown-reloc",
-                   "ftown-slab", ".log", "presentmon", "musicbridge.songs")
+# Diagnostics are not shipped: GfxProbe, WorldProbe, ExitTrace, FpsRecorder, MusicProbe, PatchMap (logs which plugin
+# patches which bytes; for our conflict checks only), and no logs.
+FORBIDDEN_NAMES = ("gfxprobe", "worldprobe", "exittrace", "fpsrecorder", "musicprobe", "patchmap", "ftowntimes",
+                   "ftown-reloc", "ftown-slab", ".log", "presentmon", "musicbridge.songs")
 PRIVATE = os.path.join(HERE, "private", "forbidden.json")  # personal details to keep out (not in the public source)
 
 
@@ -72,6 +77,15 @@ FTOWN_COMMENT_NEW = (b"; A place of your own on F-Town's minimap, shown with the
                      b"SafeHouseIcon = 0\r\n")
 
 
+INPUT_CONTROLS = (b"\r\n[Controls]\r\n"
+                  b"; 1 = the game's default controller bindings (a new profile, and Restore Defaults in the Controls menu)\r\n"
+                  b"; become the mod's layout for an Xbox pad: RT accelerate, LT brake, left stick steer, right stick up/down\r\n"
+                  b"; shift up/down, A nitrous, B handbrake, X speedbreaker, Y pull camera back, LB look behind, RB camera,\r\n"
+                  b"; Back reset, Start pause, D-pad events/blacklist/map/messages, right stick click next song.\r\n"
+                  b"; 0 = the game's own defaults. Read when the game starts.\r\n"
+                  b"DefaultLayout = 1\r\n")
+
+
 def release_ini(name, data):
     """The public version of one of our .ini files (CRLF kept)."""
     if name == "FTownLoader.ini":
@@ -80,6 +94,7 @@ def release_ini(name, data):
     if name == "InputBridge.ini":
         data = _replace(data, b"\r\nLog = 1\r\nDir = ..\\..\\telemetry\r\nKeepLast = 10000\r\n",
                         b"\r\nLog = 0\r\nDir = telemetry\r\nKeepLast = 50\r\n")
+        data = _replace(data, b"\r\nVirtualController = 1\r\n", b"\r\nVirtualController = 1\r\n" + INPUT_CONTROLS)
         return _replace(data, b"StateChanges = 1", b"StateChanges = 0")
     if name == "MusicBridge.ini":
         data = _replace(data, b"Folder = ..\\..\\CUSTOM SONGS\r\n", b"Folder = ..\\CUSTOM SONGS\r\n")
@@ -158,7 +173,7 @@ def payload():
             _same(src, os.path.join(SCRIPTS, n), n)
         _put(src, "builds/" + n)
     for n in PLUGINS:
-        src = os.path.join(SCRIPTS, n)
+        src = PLUGIN_SOURCES.get(n, os.path.join(SCRIPTS, n))
         _put(src, "plugins/" + n, release_ini(n, open(src, "rb").read()) if n.endswith(".ini") else None)
     for n in ("CarStable.asi", "CarStable.ini"):
         src = os.path.join(SCRIPTS, n)

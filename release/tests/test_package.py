@@ -31,6 +31,20 @@ def test_release_ini_telemetry_off():
     assert out.count(b"\r\n") == out.count(b"\n")
 
 
+def test_release_ini_default_layout_on():
+    out = build_package.release_ini("InputBridge.ini", _read("InputBridge.ini"))
+    assert out.count(b"\r\n[Controls]\r\n") == 1 and b"\r\nDefaultLayout = 1\r\n" in out
+    start = out.index(b"[Controls]")
+    assert out.index(b"DefaultLayout = 1") < out.index(b"\r\n[", start + 1), "the key is inside [Controls]"
+    assert out.count(b"\r\n") == out.count(b"\n")
+
+
+def test_package_ships_new_inputbridge_and_no_diagnostics():
+    assert "PatchMap.asi" not in build_package.PLUGINS
+    assert "patchmap" in build_package.FORBIDDEN_NAMES
+    assert build_package.PLUGIN_SOURCES["InputBridge.asi"] == os.path.join(REPO, "input", "src", "InputBridge.asi")
+
+
 def test_release_ini_music_folder_in_game():
     out = build_package.release_ini("MusicBridge.ini", _read("MusicBridge.ini"))
     assert b"Folder = ..\\CUSTOM SONGS\r\n" in out and b"Calls = 0" in out

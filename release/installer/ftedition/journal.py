@@ -9,6 +9,11 @@ step, also when a step fails, so `uninstall` restores a half-finished install as
 Uninstall restores every backup (checked by sha256), deletes every file the install created and the folders it
 created once empty, and removes the backup folder. Files the game made after the install (saves, logs, times) are not
 the install's and stay.
+
+Profile saves are the player's, not the install's: the profiles step (profiles.py) records each save it changes with
+profile_backup() (journal "profiles": sha256 before and after, the original in <backup folder>\\profiles\\...), and the
+step's area check accepts those changes. Uninstall puts a save back only if it is still exactly as the install left it
+(the player has not played since); otherwise it keeps the player's save and says so.
 """
 import contextlib
 import fnmatch
@@ -105,6 +110,22 @@ class Journal:
             raise Failed("backup of %s failed (copy differs)" % rel)
         self.data["backed"][rel] = {"size": os.path.getsize(src), "sha256": digest, "step": None}
 
+    def profile_backup(self, rel, before, after):
+        """Records a profile save the profiles step is about to change from `before` to `after` (bytes): the original
+        is copied into the backup folder (and checked) first, then the journal is saved. The step writes the file."""
+        profiles = self.data.setdefault("profiles", {})
+        if rel in profiles:
+            raise Failed("profile %s recorded twice" % rel)
+        dst = os.path.join(self.dir, "profiles", *rel.split("/"))
+        os.makedirs(os.path.dirname(dst), exist_ok=True)
+        with open(dst, "wb") as f:
+            f.write(before)
+        digest = hashlib.sha256(before).hexdigest()
+        if _sha(dst) != digest:
+            raise Failed("backup of %s failed (copy differs)" % rel)
+        profiles[rel] = {"before": digest, "after": hashlib.sha256(after).hexdigest()}
+        self._save()
+
     @contextlib.contextmanager
     def step(self, name, may_change):
         before, dirs_before = _scan(self.game)
@@ -128,8 +149,9 @@ class Journal:
             for d in sorted(dirs_after - dirs_before):
                 if d not in self.data["created_dirs"]:
                     self.data["created_dirs"].append(d)
+            profiles = self.data.get("profiles", {})
             outside = sorted(rel for rel in before if rel not in self.data["backed"] and rel not in self.data["created"]
-                             and (rel not in after or after[rel] != before[rel]))
+                             and rel not in profiles and (rel not in after or after[rel] != before[rel]))
             # drop this step's backups of files it left unchanged
             for rel in new_backups:
                 p = os.path.join(self.game, *rel.split("/"))
@@ -190,6 +212,20 @@ def uninstall(game):
         p = os.path.join(game, *d.split("/"))
         if os.path.isdir(p) and not os.listdir(p):
             os.rmdir(p)
+    profiles_restored, profiles_kept = [], []
+    for rel, info in sorted(data.get("profiles", {}).items()):
+        src = os.path.join(folder, "profiles", *rel.split("/"))
+        dst = os.path.join(game, *rel.split("/"))
+        if not os.path.exists(dst) or _sha(dst) != info["after"]:
+            profiles_kept.append(rel)  # deleted or played since: the player's save now, left as it is
+            continue
+        if _sha(src) != info["before"]:
+            raise Failed("the backup of %s is damaged; nothing more restored" % rel)
+        shutil.copyfile(src, dst)
+        if _sha(dst) != info["before"]:
+            raise Failed("restoring %s failed" % rel)
+        profiles_restored.append(rel)
     shutil.rmtree(os.path.join(game, WORK), ignore_errors=True)
     shutil.rmtree(folder)
-    return {"restored": restored, "removed": removed, "edited_after_install": sorted(edited)}
+    return {"restored": restored, "removed": removed, "edited_after_install": sorted(edited),
+            "profiles_restored": profiles_restored, "profiles_kept": profiles_kept}

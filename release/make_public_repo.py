@@ -88,7 +88,12 @@ def selected(files):
 
 def main():
     if os.path.isdir(OUT):
-        shutil.rmtree(OUT)
+        # the published repository's .git (created 2026-11-07) is kept: the snapshot is rewritten around it
+        for name in os.listdir(OUT):
+            if name == ".git":
+                continue
+            p = os.path.join(OUT, name)
+            shutil.rmtree(p) if os.path.isdir(p) else os.remove(p)
     files = selected(tracked())
     for rel in files:
         src = os.path.join(REPO, *rel.split("/"))
@@ -108,6 +113,11 @@ def main():
         if name.lower().endswith(".png"):
             shutil.copyfile(os.path.join(REPO, "icons", name), os.path.join(OUT, "icons", name))
             files.append("icons/" + name)
+    # screenshots for the public README (release/public/screenshots/, chosen 2026-11-08: no home mark in view)
+    os.makedirs(os.path.join(OUT, "screenshots"), exist_ok=True)
+    for name in sorted(os.listdir(os.path.join(HERE, "public", "screenshots"))):
+        shutil.copyfile(os.path.join(HERE, "public", "screenshots", name), os.path.join(OUT, "screenshots", name))
+        files.append("screenshots/" + name)
     hits = build_package.forbidden_hits(OUT, check_names=False)  # source: diagnostics' sources may be public
     listing = sorted(files)
     with open(os.path.join(OUT, "FILELIST.txt"), "w", encoding="utf-8", newline="\n") as f:

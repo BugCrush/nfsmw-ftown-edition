@@ -101,6 +101,7 @@ __pycache__/
 /input/tests/*.lib
 /input/tests/*.log
 /input/tests/*.ini
+/input/tests/out-default-layout/
 
 # GfxProbe stand-in builds and their output (may hold a copy of DXVK's d3d9.dll, images, shader files).
 /gfx/tests/out/

@@ -12,7 +12,7 @@ import sys
 
 FROZEN = getattr(sys, "frozen", False)
 REPO = None if FROZEN else os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
-TOOL_DIRS = [("tools", "x360"), ("tools", "cars"), ("tools", "textures"), ("tools", "carbuild"),
+TOOL_DIRS = [("tools", "x360"), ("tools", "cars"), ("tools", "textures"), ("tools", "carbuild"), ("tools", "controls"),
              ("tools", "cars", "packages", "thar"), ("tools", "cars", "packages", "longnosecab")]
 
 if not FROZEN:

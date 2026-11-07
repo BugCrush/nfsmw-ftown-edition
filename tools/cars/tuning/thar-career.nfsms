@@ -1,0 +1,10 @@
+game MW
+// Mahindra Thar in the user's own game (the user, 2026-11-07: "unlockable in career right after defeating blacklist
+// one", meaning the first rival the story has you beat, #15 Sonny, "and purchasable for 10k dollars").
+// The game unlocks a car when frontend UnlockedAt >= the career's CurrentBin (CareerUnlocker::IsCarUnlocked 0x58A5F0,
+// QuickRaceUnlocker 0x58A0D0 and the Unlimiter's hook of it). A career sits at bin 16 in the prologue and 15 until
+// Sonny is beaten; beating him enters bin 14 (EEnterBin 0x62C2D0 writes CurrentBin = 14). So UnlockedAt 14, as the
+// stock Audi A3 and TT (unlocked after Sonny). The same rule locks it in Quick Race (and F-Town's Bonus Maps, which use
+// the Quick Race car select) until then. Not part of the public package (cars-release.yaml stays at 16 / 70,000).
+update_field frontend thar UnlockedAt 14
+update_field frontend thar Cost 10000

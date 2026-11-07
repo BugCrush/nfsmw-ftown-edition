@@ -30,6 +30,8 @@ class Ctx:
         self.mirror = os.path.join(work, "mirror")
         self.done, self.skipped = [], {}
         self.tools = None
+        self.profiles = True  # write our controller layout into existing profiles (the player's answer)
+        self.profile_results = {}
 
     def p(self, *parts):
         return os.path.join(self.payload, *parts)
@@ -347,6 +349,15 @@ def run_ftown(ctx):
     _copy_tree(ctx, ctx.p("ftown"), "scripts")
 
 
+def run_profiles(ctx):
+    """Our controller layout in the existing profiles (profiles.py), if the player said yes."""
+    from . import profiles
+    if not ctx.profiles:
+        ctx.log("  existing profiles left as they are (your choice); new profiles get our layout")
+        return
+    ctx.profile_results = profiles.apply(ctx.game, ctx.journal, ctx.log)
+
+
 def run_settings(ctx):
     """Our settings: value changes in other authors' .ini files (their files stay theirs; settings.py). A file the
     game lacks is first copied from the payload's default where settings.json names one (a game without the
@@ -401,6 +412,8 @@ def all_steps(cars_order):
         Step("carstable", "CarStable", run_carstable, ["scripts/**"]),
         Step("our_plugins", "our plugins", run_our_plugins, ["scripts/**"]),
         Step("ftown", "F-Town", run_ftown, ["scripts/**"]),
+        # profile saves are recorded by the journal's profile_backup(), not by the step's area
+        Step("profiles", "our controller layout in existing profiles", run_profiles, [], after=["our_plugins"]),
         Step("settings", "our settings", run_settings, ["scripts/**", "dxvk.conf"]),
     ]
     return s

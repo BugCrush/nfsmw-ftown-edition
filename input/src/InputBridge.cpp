@@ -104,6 +104,9 @@ struct Settings
     int telemetryKeep = 10;
     char telemetryDir[MAX_PATH] = "..\\..\\telemetry";
     bool logState = true;
+    // [Controls] DefaultLayout: the game's default controller bindings (what a new profile and the Controls menu's
+    // "restore defaults" get) become our layout when the pad is one we make virtual. Read at start only.
+    bool defaultLayout = false;
 };
 static Settings g_cfg;
 static char g_iniPath[MAX_PATH];
@@ -188,6 +191,7 @@ static void LoadSettings(const char* path)
     g_cfg.telemetryKeep = GetPrivateProfileIntA("Telemetry", "KeepLast", defaults.telemetryKeep, path);
     GetPrivateProfileStringA("Telemetry", "Dir", defaults.telemetryDir, g_cfg.telemetryDir, MAX_PATH, path);
     g_cfg.logState = GetPrivateProfileIntA("Log", "StateChanges", 1, path) != 0;
+    g_cfg.defaultLayout = GetPrivateProfileIntA("Controls", "DefaultLayout", 0, path) != 0;
 }
 
 // ---------------------------------------------------------------------------------------------
@@ -2368,6 +2372,144 @@ static bool PatchImport()
     return false;
 }
 
+// ---------------------------------------------------------------------------------------------
+// Default controller layout ([Controls] DefaultLayout)
+//
+// speed.exe v1.3 keeps the bindings in a live table at 0x91F418: 24 records of 0x34 bytes, the first 19 in the
+// Controls menu's order (the 48 bytes a profile save stores per action are a record's +4..+0x33). Each record
+// has four slots of (type, device, code): +4 keyboard, +0x10 second key, +0x1C controller, +0x28 second
+// controller. The controller's defaults are not data: the function at 0x63CD80 hashes the pad's product name
+// (the joystick object at *0x91F150, name at +0x114), picks hard-coded bindings for a few known pads or a generic
+// set (A accelerate, X brake, no shifting...), and writes the controller slots of all 24 records. The game calls it
+// when its input starts (0x63F850, so a new profile gets them), from the Controls menu's "restore defaults"
+// (0x51D702), and when a loaded profile was saved with another pad (0x56E27D). Details: docs/controller-notes.md.
+//
+// We put a jump at 0x63CD80: the game's function runs as before, then, if the pad is one we make virtual (its name
+// contains "XBOX", as for DeviceProxy), the 19 actions' controller slots become our layout and the second
+// controller slots are cleared. Records 19-23 (menu navigation) stay the game's. The bytes are checked first.
+
+struct LayoutEntry { DWORD type, index; };
+// The chosen layout, in the Controls menu's order; the same as tools/mw-controls.py LAYOUT.
+static const LayoutEntry kDefaultLayout[19] = {
+    { 7, 0 }, // Accelerate: RT (Rx positive half)
+    { 5, 2 }, // Brake / Reverse: LT (Z positive half)
+    { 4, 0 }, // Steer Left: left stick left
+    { 5, 0 }, // Steer Right: left stick right
+    { 2, 1 }, // Handbrake: B
+    { 2, 2 }, // Speedbreaker: X
+    { 2, 0 }, // N2O: A
+    { 7, 1 }, // Shift Down: right stick down
+    { 6, 1 }, // Shift Up: right stick up
+    { 2, 6 }, // Reset Car Position: Back
+    { 3, 0 }, // Engage Event: D-pad up
+    { 3, 2 }, // View Blacklist: D-pad down
+    { 3, 3 }, // View World Map: D-pad left
+    { 3, 1 }, // View SMS Messages: D-pad right
+    { 2, 9 }, // Play Next Song: right stick click
+    { 2, 5 }, // Change Camera View: RB
+    { 2, 4 }, // Look Behind: LB
+    { 2, 3 }, // Pull Camera Back: Y
+    { 2, 7 }, // Pause: Start
+};
+
+static const DWORD kDefaultsFunc = 0x63CD80;   // the game's "controller defaults for this pad"
+static const DWORD kBindingTable = 0x91F418;   // the live bindings table
+static const DWORD kBindingStride = 0x34;
+static const DWORD kJoystickPtr = 0x91F150;    // the first joystick object
+static const DWORD kJoystickName = 0x114;      // its product name, inside the object
+static BYTE* g_defaultsStub;                   // our code: the game's function, then ApplyDefaultLayout
+static LONG g_defaultLayoutCalls;
+
+// Reads game memory without risking a crash on an unmapped address.
+static bool SafeRead(DWORD address, void* out, SIZE_T size)
+{
+    SIZE_T got = 0;
+    return ReadProcessMemory(GetCurrentProcess(), (LPCVOID)(UINT_PTR)address, out, size, &got) && got == size;
+}
+
+static bool BytesAre(DWORD address, const BYTE* expected, SIZE_T size)
+{
+    BYTE buf[32];
+    return size <= sizeof(buf) && SafeRead(address, buf, size) && memcmp(buf, expected, size) == 0;
+}
+
+extern "C" void __cdecl ApplyDefaultLayout()
+{
+    LONG call = InterlockedIncrement(&g_defaultLayoutCalls);
+    DWORD pad = 0;
+    char name[128] = "";
+    if (!SafeRead(kJoystickPtr, &pad, sizeof(pad)) || !pad)
+    {
+        Log("Default layout (call %ld): no controller; the game's defaults kept", call);
+        return;
+    }
+    for (int i = 0; i < (int)sizeof(name) - 1; ++i)
+        if (!SafeRead(pad + kJoystickName + i, &name[i], 1) || !name[i])
+        {
+            name[i] = 0;
+            break;
+        }
+    name[sizeof(name) - 1] = 0;
+    if (!g_cfg.virtualController || !ContainsNoCase(name, "XBOX"))
+    {
+        Log("Default layout (call %ld): controller \"%s\" is not one we make virtual; the game's defaults kept", call, name);
+        return;
+    }
+    for (int i = 0; i < 19; ++i)
+    {
+        DWORD* rec = (DWORD*)(UINT_PTR)(kBindingTable + i * kBindingStride);
+        rec[7] = kDefaultLayout[i].type;  // +0x1C controller: type, device 0, index
+        rec[8] = 0;
+        rec[9] = kDefaultLayout[i].index;
+        rec[10] = rec[11] = rec[12] = 0;  // +0x28 second controller: none
+    }
+    Log("Default layout (call %ld): controller \"%s\": our layout written (RT accelerate, LT brake, right stick shifts)", call, name);
+}
+
+// Installs the jump at 0x63CD80. Returns a short description for the log.
+static const char* InstallDefaultLayout()
+{
+    // The function's first instructions (mov eax, [0x91F150]; sub esp, 0x240), and three places that confirm the
+    // table's address and record size: its copy loop's start (mov eax, 0x91F440) and end (cmp eax, 0x91F920), and
+    // the bindings accessor 0x628CB0 (mov eax, [esp+4]; imul eax, eax, 0x34; add eax, 0x91F41C).
+    static const BYTE entry[] = { 0xA1, 0x50, 0xF1, 0x91, 0x00, 0x81, 0xEC, 0x40, 0x02, 0x00, 0x00 };
+    static const BYTE loopStart[] = { 0xB8, 0x40, 0xF4, 0x91, 0x00 };
+    static const BYTE loopEnd[] = { 0x3D, 0x20, 0xF9, 0x91, 0x00 };
+    static const BYTE accessor[] = { 0x8B, 0x44, 0x24, 0x04, 0x6B, 0xC0, 0x34, 0x05, 0x1C, 0xF4, 0x91, 0x00 };
+    if (!BytesAre(kDefaultsFunc, entry, sizeof(entry)))
+        return "refused: the bytes at 0x63CD80 are not the game's own (another version of speed.exe, or another module changed them)";
+    if (!BytesAre(0x63EE8E, loopStart, sizeof(loopStart)) || !BytesAre(0x63EEC4, loopEnd, sizeof(loopEnd)) ||
+        !BytesAre(0x628CB0, accessor, sizeof(accessor)))
+        return "refused: the bindings table is not where speed.exe v1.3 keeps it";
+    // Our code, in one executable block:
+    //   stub:  call tramp; pushad; call ApplyDefaultLayout; popad; ret
+    //   tramp: mov eax, [0x91F150]; jmp 0x63CD85        (the game's first instruction, then the rest of it)
+    BYTE* code = (BYTE*)VirtualAlloc(nullptr, 64, MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE);
+    if (!code)
+        return "failed: no memory for the hook";
+    BYTE* p = code;
+    BYTE* tramp = code + 32;
+    *p++ = 0xE8; *(DWORD*)p = (DWORD)(tramp - (p + 4)); p += 4;
+    *p++ = 0x60;
+    *p++ = 0xE8; *(DWORD*)p = (DWORD)((BYTE*)&ApplyDefaultLayout - (p + 4)); p += 4;
+    *p++ = 0x61;
+    *p++ = 0xC3;
+    memcpy(tramp, entry, 5);
+    tramp[5] = 0xE9;
+    *(DWORD*)(tramp + 6) = (DWORD)((kDefaultsFunc + 5) - (DWORD)(UINT_PTR)(tramp + 10));
+    FlushInstructionCache(GetCurrentProcess(), code, 64);
+    g_defaultsStub = code;
+    DWORD old;
+    BYTE* target = (BYTE*)(UINT_PTR)kDefaultsFunc;
+    if (!VirtualProtect(target, 5, PAGE_EXECUTE_READWRITE, &old))
+        return "failed: could not make 0x63CD80 writable";
+    target[0] = 0xE9;
+    *(DWORD*)(target + 1) = (DWORD)(code - (target + 5));
+    VirtualProtect(target, 5, old, &old);
+    FlushInstructionCache(GetCurrentProcess(), target, 5);
+    return "installed at 0x63CD80";
+}
+
 BOOL WINAPI DllMain(HINSTANCE instance, DWORD reason, LPVOID)
 {
     if (reason == DLL_PROCESS_DETACH)
@@ -2410,5 +2552,6 @@ BOOL WINAPI DllMain(HINSTANCE instance, DWORD reason, LPVOID)
     Log("InputBridge stage 2, host=%s virtualController=%d rumble=%d strength=%.2f", exeName,
         g_cfg.virtualController, g_cfg.rumble, g_cfg.strength);
     Log("Import hook %s", PatchImport() ? "installed" : "NOT FOUND (DirectInput8Create not imported)");
+    Log("Default layout ([Controls] DefaultLayout): %s", g_cfg.defaultLayout ? InstallDefaultLayout() : "off");
     return TRUE;
 }

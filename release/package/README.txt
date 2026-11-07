@@ -66,7 +66,15 @@ Close the game. Open a command prompt in this folder and run:
   FTownEditionInstaller.exe install --game "C:\Games\Need for Speed Most Wanted" --downloads "C:\NFSMW downloads"
 
 (or double-click FTownEditionInstaller.exe and answer its questions). The install takes about 5 to 15 minutes and prints each
-part as it goes. The installer never touches your saves.
+part as it goes.
+
+Controller layout: a new profile starts with the mod's layout for an Xbox controller (RT accelerate, LT brake, left
+stick steer, right stick up/down to shift, A nitrous, B handbrake, X speedbreaker, Y pull camera back, LB look behind,
+RB change camera, Back reset car, Start pause, D-pad events/blacklist/map/messages, right stick click next song).
+The installer asks whether to put the same layout into your existing profiles (default yes; --profiles no on the
+command line to leave them). It changes only their controller bindings and keeps a copy of each. In any profile,
+Restore Defaults on the Controls menu's controller page also gives this layout (the game's own defaults put
+accelerate and brake on the A and X buttons).
 
 Some antivirus programs distrust installers made from Python programs. The installer's source is public (link below);
 every file this package contains is listed with its SHA-256 in payload-manifest.json.
@@ -101,7 +109,9 @@ Uninstall
   FTownEditionInstaller.exe uninstall --game "C:\Games\Need for Speed Most Wanted"
 
 puts back every game file exactly as it was before the install (checked by SHA-256) and removes everything the
-install added. Saves, logs and race times the game wrote afterwards stay.
+install added. Saves, logs and race times the game wrote afterwards stay. A profile the installer gave the mod's
+controller layout gets its old bindings back if you have not played it since; a profile you have played keeps the
+mod's layout (Restore Defaults on its Controls menu's controller page then gives the game's own).
 
 
 Known limits

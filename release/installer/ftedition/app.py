@@ -67,7 +67,7 @@ def check(game, roots, payload=None):
         shutil.rmtree(work, ignore_errors=True)
 
 
-def install(game, roots, payload=None, running=gamecheck.game_running, log=None):
+def install(game, roots, payload=None, running=gamecheck.game_running, log=None, profiles=True):
     game = os.path.abspath(game)
     payload = payload or payload_dir()
     check_game(game, payload, running=running)
@@ -86,9 +86,10 @@ def install(game, roots, payload=None, running=gamecheck.game_running, log=None)
         items, found = find_downloads(payload, roots, work)
         report_downloads(items, found, log)
         ctx = steps.Ctx(game, payload, work, found, j, log)
+        ctx.profiles = profiles
         all_steps = steps.all_steps(steps.load_cars_order(payload))
         done, skipped = steps.run_all(ctx, all_steps, log)
-        j.finish({"version": VERSION, "done": done, "skipped": skipped,
+        j.finish({"version": VERSION, "done": done, "skipped": skipped, "profiles": ctx.profile_results,
                   "downloads": {i: isinstance(found[i], downloads.Found) for i in items}})
         log("Finished: %d steps done, %d skipped." % (len(done), len(skipped)))
         for sid, why in skipped.items():

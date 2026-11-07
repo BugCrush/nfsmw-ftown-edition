@@ -8,6 +8,19 @@ and our files) is published separately on the mod sites.
 None of EA's files and no other modder's files are in this repository or in the package: the installer applies the
 player's own downloads of other authors' mods, pinned by SHA-256 to their official releases.
 
+**Download:** [GitHub release v1.0.0](https://github.com/BugCrush/nfsmw-ftown-edition/releases/tag/v1.0.0) ·
+[Nexus Mods](https://www.nexusmods.com/needforspeedmostwanted2005/mods/356)
+
+## Screenshots
+
+![The Mahindra Thar in the car lot](screenshots/thar-title-card.jpg)
+
+| | |
+|---|---|
+| ![A market street in F-Town](screenshots/ftown-market.jpg) | ![Neelam Chowk Ajronda metro station](screenshots/ftown-neelam-chowk.jpg) |
+| ![The Thar on an F-Town sector road](screenshots/ftown-thar.jpg) | ![Speed Trap on Mathura Road](screenshots/ftown-speed-trap.jpg) |
+| ![The ramp where the road leaves Rockport for F-Town](screenshots/rockport-ramp.jpg) | |
+
 ## The parts
 
 | Part | What it does | Source |

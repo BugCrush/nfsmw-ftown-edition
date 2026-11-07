@@ -7,7 +7,7 @@ works on your own copy of the game.
 Our work (MIT licence, see LICENSE)
 -----------------------------------
 The installer, the plugins InputBridge (controller and rumble), MusicBridge (your own songs), VisualBridge (picture
-effects), ReflectRate, PatchMap, CarStable, FTownLoader and the F-Town map files, and the Mahindra Thar's build.
+effects), ReflectRate, CarStable, FTownLoader and the F-Town map files, and the Mahindra Thar's build.
 Built with Claude Code (Anthropic).
 
 F-Town
