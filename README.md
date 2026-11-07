@@ -11,6 +11,12 @@ player's own downloads of other authors' mods, pinned by SHA-256 to their offici
 **Download:** [GitHub release v1.0.0](https://github.com/BugCrush/nfsmw-ftown-edition/releases/tag/v1.0.0) ·
 [Nexus Mods](https://www.nexusmods.com/needforspeedmostwanted2005/mods/356)
 
+## Video
+
+[![Rockport to F-Town: the jump, the highway and a police chase into the city (click to play)](media/ftown-trailer-poster.jpg)](media/ftown-trailer.mp4)
+
+*Click the picture to play the video (1:56).*
+
 ## The parts
 
 | Part | What it does | Source |
