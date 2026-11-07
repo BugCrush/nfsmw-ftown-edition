@@ -13,9 +13,9 @@ player's own downloads of other authors' mods, pinned by SHA-256 to their offici
 
 ## Video
 
-[![Rockport to F-Town: the jump, the highway and a police chase into the city (click to play)](media/ftown-trailer-poster.jpg)](media/ftown-trailer.mp4)
+https://github.com/user-attachments/assets/4289ab82-6351-4356-9999-4f2596b3e8d5
 
-*Click the picture to play the video (1:56).*
+*Quality Reduced for GitHub
 
 ## The parts
 
