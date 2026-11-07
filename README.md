@@ -11,16 +11,6 @@ player's own downloads of other authors' mods, pinned by SHA-256 to their offici
 **Download:** [GitHub release v1.0.0](https://github.com/BugCrush/nfsmw-ftown-edition/releases/tag/v1.0.0) ·
 [Nexus Mods](https://www.nexusmods.com/needforspeedmostwanted2005/mods/356)
 
-## Screenshots
-
-![The Mahindra Thar in the car lot](screenshots/thar-title-card.jpg)
-
-| | |
-|---|---|
-| ![A market street in F-Town](screenshots/ftown-market.jpg) | ![Neelam Chowk Ajronda metro station](screenshots/ftown-neelam-chowk.jpg) |
-| ![The Thar on an F-Town sector road](screenshots/ftown-thar.jpg) | ![Speed Trap on Mathura Road](screenshots/ftown-speed-trap.jpg) |
-| ![The ramp where the road leaves Rockport for F-Town](screenshots/rockport-ramp.jpg) | |
-
 ## The parts
 
 | Part | What it does | Source |
@@ -38,6 +28,14 @@ player's own downloads of other authors' mods, pinned by SHA-256 to their offici
 | Companion builds | Build scripts for the open-source plugins the package includes | `companions` |
 | Installer | Finds the player's downloads by content, checks the game, installs with a byte-exact uninstall | `release/installer` |
 | Diagnostics | GfxProbe, WorldProbe, FpsRecorder, ExitTrace (not in the package) | `gfx`, `world`, `fps-capture`, `tools/diag` |
+
+## Screenshots
+
+| | | |
+|---|---|---|
+| ![The Mahindra Thar](screenshots/thar-title-card.jpg) | ![The Bugatti Chiron](screenshots/chiron-title-card.jpg) | ![The 1971 Dodge Challenger](screenshots/challenger-title-card.jpg) |
+| ![The Ford Raptor](screenshots/raptor-title-card.jpg) | ![A market street in F-Town](screenshots/ftown-market.jpg) | ![Neelam Chowk Ajronda metro station](screenshots/ftown-neelam-chowk.jpg) |
+| ![The Thar on an F-Town sector road](screenshots/ftown-thar.jpg) | ![Speed Trap on Mathura Road](screenshots/ftown-speed-trap.jpg) | ![The ramp where the road leaves Rockport for F-Town](screenshots/rockport-ramp.jpg) |
 
 ## Building
 
