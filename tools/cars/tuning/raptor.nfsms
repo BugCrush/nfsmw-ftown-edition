@@ -1,0 +1,33 @@
+game MW
+// Raptor tuning v2 (the user, 2026-10-31): weight 7000 kg; acceleration at least 1.75x the stock Raptor's, so
+// torque x4.489 of the original (1.75 x 7000/2729); final gears back to stock (5.3, upgraded 4.5: the stock truck
+// never reached its gearing limit); brakes x2.6 of the original (2.6x the weight); drag 0.22. Both stages.
+update_field pvehicle raptor MASS 7000
+update_field engine raptor TORQUE[0] 763.1
+update_field engine raptor TORQUE[1] 1122.2
+update_field engine raptor TORQUE[2] 1364.7
+update_field engine raptor TORQUE[3] 1539.7
+update_field engine raptor TORQUE[4] 1643.0
+update_field engine raptor TORQUE[5] 1692.4
+update_field engine raptor TORQUE[6] 1593.6
+update_field engine raptor TORQUE[7] 1432.0
+update_field engine raptor TORQUE[8] 1247.9
+update_field brakes raptor BRAKES Front 962.0
+update_field brakes raptor BRAKES Rear 1437.8
+update_field brakes raptor EBRAKE 1690.0
+update_field transmission raptor FINAL_GEAR 5.3
+update_field chassis raptor DRAG_COEFFICIENT 0.22
+update_field engine raptor_top TORQUE[0] 1822.5
+update_field engine raptor_top TORQUE[1] 2258.0
+update_field engine raptor_top TORQUE[2] 3627.1
+update_field engine raptor_top TORQUE[3] 4125.4
+update_field engine raptor_top TORQUE[4] 4408.2
+update_field engine raptor_top TORQUE[5] 4547.4
+update_field engine raptor_top TORQUE[6] 4273.5
+update_field engine raptor_top TORQUE[7] 3824.6
+update_field engine raptor_top TORQUE[8] 3245.5
+update_field brakes raptor_top BRAKES Front 1531.4
+update_field brakes raptor_top BRAKES Rear 1791.4
+update_field brakes raptor_top EBRAKE 2574.0
+update_field transmission raptor_top FINAL_GEAR 4.5
+update_field chassis raptor_top DRAG_COEFFICIENT 0.22

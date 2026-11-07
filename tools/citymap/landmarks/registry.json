@@ -1,0 +1,94 @@
+{
+ "about": "F-Town's landmarks (docs/superpowers/specs/2026-11-03-ftown-landmarks-design.md). Coordinates, OSM ids, the design's photo numbers with their file names in ftownphotos/ (git-ignored) and crop corners in the photos' pixels (top left, top right, bottom right, bottom left); no pixels here. Read by tools/citymap/landmarks.py; photo crops become textures under .superpowers/citymap/faridabad/phototex/ (git-ignored) by tools/citymap/phototex.py.",
+ "layouts": {
+  "plain": [],
+  "gsv": [[0, 0, 818, 100], [0, 1240, 818, 1598]],
+  "gsv_panel": [[0, 0, 818, 100], [0, 1000, 818, 1598]],
+  "frame02": [[0, 0, 818, 472], [0, 934, 818, 1598]],
+  "title36": [[0, 0, 416, 165], [140, 585, 275, 625]]
+ },
+ "photos": {
+  "2": {"file": "photo-2.jpeg", "layout": "frame02"},
+  "7": {"file": "photo-7.jpeg", "layout": "gsv", "patch": [[455, 748, 728, 812], [568, 818, 628, 885], [706, 876, 768, 938]]},
+  "10": {"file": "photo-10.jpeg", "layout": "gsv", "patch": [[0, 660, 282, 726], [116, 728, 168, 792]]},
+  "12": {"file": "photo-12.jpeg", "layout": "gsv"},
+  "15": {"file": "photo-15.jpeg", "layout": "gsv", "patch": [[252, 598, 314, 668]]},
+  "20": {"file": "photo-20.jpeg", "layout": "gsv"},
+  "24": {"file": "photo-24.jpeg", "layout": "gsv_panel", "block": [[232, 382, 588, 492], [296, 492, 432, 548]]},
+  "32": {"file": "photo-32.jpeg", "layout": "plain"},
+  "33": {"file": "photo-33.jpeg", "layout": "plain"},
+  "35": {"file": "photo-35.jpeg", "layout": "plain"},
+  "36": {"file": "photo-36.jpeg", "layout": "title36"},
+  "38": {"file": "photo-38.jpeg", "layout": "plain"},
+  "41": {"file": "photo-41.jpeg", "layout": "plain"},
+  "43": {"file": "photo-43.jpeg", "layout": "plain", "block": [[0, 0, 415, 300]]},
+  "50": {"file": "photo-50.jpeg", "layout": "plain"},
+  "53": {"file": "photo-53.jpeg", "layout": "plain"}
+ },
+ "landmarks": [
+  {"key": "STN_NEELAM", "kind": "station", "name": "Neelam Chowk Ajronda", "osm_way": 1038912569, "source": "details", "osm_name": "Neelam Chowk Ajronda", "photos": [33, 35], "finish": "station_beige",
+   "faces": [
+    {"name": "STN_NEELAM_S", "edge": 0, "facing_road": 1109922788, "photo": 35, "corners": [[75, 190], [338, 180], [338, 420], [75, 425]], "tex": [256, 256], "z": [6.0, 18.5]},
+    {"name": "STN_NEELAM_N", "edge": 6, "facing_road": 1566803066, "photo": 33, "corners": [[170, 232], [395, 225], [395, 370], [170, 372]], "tex": [256, 256], "z": [6.0, 18.5]}
+   ]},
+  {"key": "STN_BATA", "kind": "station", "name": "Bata Chowk", "osm_way": 1038912570, "source": "details", "osm_name": "Bata Chowk", "photos": [37, 38, 39, 40, 41], "finish": "station_orange",
+   "faces": [
+    {"name": "STN_BATA_N", "edge": 6, "facing_road": 1117077812, "photo": 41, "corners": [[40, 95], [470, 80], [470, 290], [40, 280]], "tex": [256, 128], "z": [6.0, 12.5]},
+    {"name": "STN_BATA_W", "edge": 9, "facing_road": 554983258, "photo": 38, "corners": [[107, 331], [1595, 96], [1595, 640], [107, 747]], "tex": [512, 128], "z": [6.0, 12.5], "width_m": 36.0, "repeat": true},
+    {"name": "STN_BATA_W", "edge": 7, "facing_road": 554983258, "photo": 38, "corners": [[107, 331], [1595, 96], [1595, 640], [107, 747]], "tex": [512, 128], "z": [6.0, 12.5], "width_m": 36.0, "repeat": true},
+    {"name": "STN_BATA_W", "edge": 11, "facing_road": 554983258, "photo": 38, "corners": [[107, 331], [1595, 96], [1595, 640], [107, 747]], "tex": [512, 128], "z": [6.0, 12.5], "width_m": 36.0, "repeat": true}
+   ]},
+  {"key": "STN_OLDFBD", "kind": "station", "name": "Old Faridabad", "osm_way": 1038927460, "source": "details", "osm_name": "Old Faridabad", "photos": [51, 53], "finish": "station_brick",
+   "faces": [
+    {"name": "STN_OLDFBD_W", "edge": 7, "facing_road": 752874842, "photo": 53, "corners": [[0, 55], [587, 35], [587, 325], [0, 325]], "tex": [512, 256], "z": [6.0, 12.5], "width_m": 24.0, "repeat": true}
+   ]},
+  {"key": "MARENGO", "kind": "hospital", "name": "Marengo Asia Hospitals", "osm_way": 352291173, "storeys": 6, "height_m": 22.0, "photos": [17, 18, 20, 21, 16, 19, 49], "finish": "glass", "canopy": {"edge": 1, "width_m": 30.0, "height_m": 13.0, "depth_m": 5.0},
+   "faces": [
+    {"name": "MARENGO_FRONT", "edge": 1, "facing_road": 172346128, "photo": 20, "corners": [[0, 420], [817, 185], [817, 1050], [0, 1040]], "tex": [512, 256], "width_m": 46.0},
+    {"name": "MARENGO_SIGN", "edge": 1, "facing_road": 172346128, "photo": 20, "corners": [[265, 245], [748, 105], [752, 180], [268, 318]], "tex": [512, 64], "z": [22.5, 25.5], "width_m": 26.0}
+   ]},
+  {"key": "FORTIS", "kind": "hospital", "name": "Fortis Escorts", "osm_way": 143698411, "osm_name": "Escorts Hospital Research Centre", "storeys": 5, "height_m": 18.0, "photos": [50], "finish": "glass",
+   "faces": [
+    {"name": "FORTIS_FRONT", "edge": 6, "facing_road": 1076008986, "photo": 50, "corners": [[140, 125], [575, 110], [575, 330], [140, 330]], "tex": [512, 256]}
+   ]},
+  {"key": "FORTIS_MAIN", "kind": "hospital", "name": "Fortis Escorts (main block)", "osm_way": 143698655, "storeys": 6, "height_m": 22.0, "photos": [23, 24, 25, 27, 48], "finish": "glass",
+   "faces": [
+    {"name": "FORTIS_SIGN", "edge": 29, "facing_road": 1076008986, "photo": 24, "corners": [[505, 170], [700, 175], [700, 220], [505, 215]], "tex": [256, 64], "z": [22.5, 25.0], "width_m": 20.0}
+   ]},
+  {"key": "AGGARWAL", "kind": "hospital", "name": "Dr. Aggarwal's Eye Hospital", "near": [28.409317, 77.319042], "storeys": 4, "height_m": 15.0, "photos": [12, 13], "finish": "blue_panel",
+   "faces": [
+    {"name": "AGGARWAL_FRONT", "edge": 0, "facing_road": 172383263, "photo": 12, "corners": [[5, 640], [680, 190], [700, 1105], [5, 995]], "tex": [512, 256], "width_m": 48.0}
+   ]},
+  {"key": "GYM", "kind": "commercial", "name": "Everyday Fitness and AU Small Finance Bank", "osm_way": 352291306, "storeys": 4, "height_m": 15.0, "photos": [15], "finish": "glass",
+   "faces": [
+    {"name": "GYM_FRONT", "edge": 1, "facing_road": 172383263, "photo": 15, "corners": [[95, 285], [817, 105], [817, 800], [95, 745]], "tex": [512, 256]}
+   ]},
+  {"key": "MKT_BATA", "kind": "market", "name": "Sector 16 Market: Dwarka Complex (Bata)", "osm_way": 352291207, "storeys": 4, "height_m": 13.6, "photos": [2], "finish": "market",
+   "faces": [
+    {"name": "MKT_BATA_FRONT", "edge": 1, "facing_road": 172383254, "photo": 2, "corners": [[165, 478], [775, 478], [780, 926], [160, 926]], "tex": [512, 256], "width_m": 32.0}
+   ]},
+  {"key": "MKT_LIC", "kind": "market", "name": "Sector 16 Market: LIC and Sardar", "osm_way": 352291374, "storeys": 3, "height_m": 10.5, "photos": [7], "finish": "market",
+   "faces": [
+    {"name": "MKT_LIC_FRONT", "edge": 1, "facing_road": 172383254, "photo": 7, "corners": [[0, 110], [817, 110], [817, 1090], [0, 1090]], "tex": [256, 256], "width_m": 14.0, "repeat": true}
+   ]},
+  {"key": "MKT_ASHOKA", "kind": "market", "name": "Sector 16 Market: Ashoka Sweets and Restaurant", "osm_way": 352291301, "storeys": 3, "height_m": 10.5, "photos": [10], "finish": "market",
+   "faces": [
+    {"name": "MKT_ASHOKA_FRONT", "edge": 3, "facing_road": 172383254, "photo": 10, "corners": [[105, 290], [670, 290], [672, 960], [103, 960]], "tex": [256, 256], "width_m": 11.0}
+   ]},
+  {"key": "PACIFIC", "kind": "mall", "name": "Pacific Mall", "osm_way": 1466660592, "osm_name": "Pacific Mall", "storeys": 5, "height_m": 20.0, "photos": [43], "finish": "mall",
+   "faces": [
+    {"name": "PACIFIC_FRONT", "edge": 3, "facing_road": 707193227, "photo": 43, "corners": [[0, 333], [380, 333], [380, 472], [0, 472]], "tex": [512, 128], "width_m": 70.0}
+   ]},
+  {"key": "STATION1", "kind": "mall", "name": "Station 1", "osm_way": 153527240, "osm_name": "Station 1", "storeys": 4, "height_m": 16.0, "photos": [], "finish": "mall", "faces": []},
+  {"key": "SRS", "kind": "mall", "name": "SRS multiplex", "osm_way": 153527238, "osm_name": "SRS multiplex", "storeys": 4, "height_m": 16.0, "photos": [], "finish": "mall", "faces": []},
+  {"key": "QRG_CENTRAL", "kind": "hospital", "name": "QRG Central Hospital", "near": [28.39305, 77.31008], "storeys": 5, "height_m": 18.0, "photos": [], "finish": "glass", "faces": []},
+  {"key": "MURAL", "kind": "mural", "name": "Neelam Flyover mural", "chains": "Neelam Flyover", "photos": [36],
+   "faces": [
+    {"name": "MURAL", "edge": -1, "facing_road": 0, "photo": 36, "corners": [[20, 384], [385, 238], [385, 478], [20, 463]], "tex": [512, 128], "width_m": 24.0, "repeat": true}
+   ]},
+  {"key": "SIGN_16A", "kind": "sign", "name": "Sector 16A direction sign", "note": "the design called it the Sector 15A sign; photo 32 reads 'Sector 16 A' (names as in the photos); placed under the metro on Mathura Road's east side near Old Faridabad station, where Sector 16A lies", "point": [28.409695, 77.311803], "photos": [32],
+   "faces": [
+    {"name": "SIGN_16A", "edge": -1, "facing_road": 0, "photo": 32, "corners": [[115, 113], [230, 110], [230, 160], [115, 162]], "tex": [128, 64]}
+   ]}
+ ]
+}

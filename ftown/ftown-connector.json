@@ -1,0 +1,74 @@
+{
+ "note": "F-Town's connection to Rockport (tools/citymap/connector.py); ftown-connector.bun and ftown-connect.bin are git-ignored",
+ "connector": {
+  "file": "ftown-connector.bun",
+  "bytes": 1387808,
+  "sha256": "d51ec80cc8df1ba86f892ff6535e5a7bc27057dc279d4ecbe4ba33d014bda0ab",
+  "section": 2601,
+  "pack": 2601
+ },
+ "connect": {
+  "file": "ftown-connect.bin",
+  "bytes": 300,
+  "sha256": "5095fcffc7eb7e3d6afc94dc4547135aecbfbd6cbc163d1de0aa4166140913b0"
+ },
+ "length_m": 2607.8,
+ "start": [
+  883.0,
+  4548.0,
+  202.7
+ ],
+ "end": [
+  1480.72,
+  7072.09,
+  99.14
+ ],
+ "max_grade_pct": 8.38,
+ "apron": [
+  1454.64,
+  1506.79
+ ],
+ "edge_gap": [
+  1426.91,
+  1526.58,
+  2
+ ],
+ "zones": {
+  "source": 703,
+  "ours": 226,
+  "adjoin": 723,
+  "substitutes": [
+   726,
+   723
+  ]
+ },
+ "radii": [
+  1500.0,
+  2500.0,
+  300.0
+ ],
+ "ramp": {
+  "top_z": 205.35,
+  "lip_deg": 11.0,
+  "back_deg": 7.0,
+  "s": [
+   -4.63,
+   9.0,
+   11.0,
+   32.58
+  ],
+  "wing_deg": 6.0,
+  "wing_end": 8.4,
+  "faces_region": [
+   703,
+   134,
+   915.93,
+   4538.764,
+   851.837,
+   4562.092,
+   9.217,
+   202.0,
+   204.5
+  ]
+ }
+}

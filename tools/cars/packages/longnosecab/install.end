@@ -1,0 +1,22 @@
+[VERSN2]
+// Longnose Cab Semi Truck (UndercoverBoy833, nfsmods.xyz/mod/3803; Burnout 3's truck cab) as a Binarius install, made
+// by us from the mod's files. The mod's own global_install.end copies from a CARS\BUS folder its archive doesn't have,
+// overwrites the Unlimiter's _CarManufacturers.ini (which our Unlimiter v4.1 doesn't read: its manufacturer hook names
+// the maker from the database), and names the car CARNAME_GENERIC_LONGNOSCAB (a typo: the game looks for
+// CARNAME_GENERIC_LONGNOSECAB). Its car parts, collision and car type are imported as the mod does (the corrected
+// parts of fix_parts.py did not bring the body back and were undone, see docs/cars-notes.md).
+unlock_memory all
+
+if directory_exists absolute "CARS\LONGNOSECAB"
+do // nothing
+else
+create_folder absolute "CARS\LONGNOSECAB"
+end
+move_file override relative absolute "..\..\..\..\.superpowers\downloads\cars\3803\files\Longnose Cab Semi Truck (Addon)\Binary Files\_Main\CARS\LONGNOSECAB\GEOMETRY.BIN" "CARS\LONGNOSECAB\GEOMETRY.BIN"
+move_file override relative absolute "..\..\..\..\.superpowers\downloads\cars\3803\files\Longnose Cab Semi Truck (Addon)\Binary Files\_Main\CARS\LONGNOSECAB\TEXTURES.BIN" "CARS\LONGNOSECAB\TEXTURES.BIN"
+
+import override GLOBAL\GLOBALB.LZC DBModelParts "..\..\..\..\.superpowers\downloads\cars\3803\files\Longnose Cab Semi Truck (Addon)\Binary Files\_CarParts\DBModelParts.bin"
+import override GLOBAL\GLOBALB.LZC Collisions "..\..\..\..\.superpowers\downloads\cars\3803\files\Longnose Cab Semi Truck (Addon)\Binary Files\_CarParts\Collisions.bin"
+import override GLOBAL\GLOBALB.LZC CarTypeInfos "..\..\..\..\.superpowers\downloads\cars\3803\files\Longnose Cab Semi Truck (Addon)\Binary Files\_CarParts\CarTypeInfos.bin"
+
+append strings.end

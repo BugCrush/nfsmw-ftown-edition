@@ -1,0 +1,13 @@
+{
+ "model": "plane",
+ "dz_dx": -0.00041455,
+ "dz_dy": 0.00051815,
+ "anchor": [
+  3231.43,
+  10414.57
+ ],
+ "source": "Copernicus DEM GLO-30 (Copernicus_DSM_COG_10_N28_00_E077_00_DEM), ground cells only, plane by least squares",
+ "check": "SRTM 1 arc-second (AWS Terrain Tiles z14)",
+ "credit": "Elevation: produced using Copernicus WorldDEM-30 (c) DLR e.V. 2010-2014 and (c) Airbus Defence and Space GmbH 2014-2018 provided under COPERNICUS by the European Union and ESA; all rights reserved. Checked against SRTM 1 arc-second (NASA, public domain) through AWS Terrain Tiles.",
+ "note": "beyond the plane no scale passed the study (both sources correlate > 0.8, difference under 0.5 x the relief): see docs/ftown-notes.md 'Elevation (2026-11-04)'"
+}

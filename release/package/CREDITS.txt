@@ -1,0 +1,67 @@
+NFSMW F-Town Edition: credits and licences
+==========================================
+
+Need for Speed Most Wanted (2005) is (c) Electronic Arts. None of EA's files are in this package; the installer
+works on your own copy of the game.
+
+Our work (MIT licence, see LICENSE)
+-----------------------------------
+The installer, the plugins InputBridge (controller and rumble), MusicBridge (your own songs), VisualBridge (picture
+effects), ReflectRate, PatchMap, CarStable, FTownLoader and the F-Town map files, and the Mahindra Thar's build.
+Built with Claude Code (Anthropic).
+
+F-Town
+------
+- Map data (c) OpenStreetMap contributors, available under the Open Database License (ODbL 1.0):
+  https://www.openstreetmap.org/copyright
+- Elevation: produced using Copernicus WorldDEM-30 (c) DLR e.V. 2010-2014 and (c) Airbus Defence and Space GmbH
+  2014-2018 provided under COPERNICUS by the European Union and ESA; all rights reserved. Checked against SRTM 1
+  arc-second (NASA, public domain).
+
+Mahindra Thar
+-------------
+- 3D model: "Mahindra Thar 3D Model" by aakash2__2, Blend Swap 31849 (https://www.blendswap.com/blend/31849),
+  licence CC-BY. Changed by us: converted to the game's format, levels of detail, colours.
+- Logo: Mahindra "Twin Peaks" logo from Wikimedia Commons, File:Mahindra_Automotive_new_logo.png (public domain per
+  Commons). Mahindra and Thar are trademarks of Mahindra & Mahindra Ltd.; this mod is not affiliated with them.
+- Its interior and driver are taken at install time from your game's own SL65.
+
+Included in this package (open source, licence texts in the licences folder)
+------------------------------------------------------------------------------
+- Ultimate ASI Loader by ThirteenAG (MIT): https://github.com/ThirteenAG/Ultimate-ASI-Loader
+- DXVK 3.1.1 by Philip Rebohle and contributors (zlib/libpng licence), x32/d3d9.dll unchanged:
+  https://github.com/doitsujin/dxvk
+- Widescreen Fix (WidescreenFixesPack) by ThirteenAG (MIT), built from source at commit 708f752:
+  https://github.com/ThirteenAG/WidescreenFixesPack
+- TexWizard by R-033 (GPL-3.0), built unchanged from commit 51e7d29: https://github.com/R-033/texwizard
+- NFSHDReflections by AeroWidescreen (GPL-3.0), built unchanged from commit d9b8597:
+  https://github.com/AeroWidescreen/NFSHDReflections
+- NFSMWFEShadows by AeroWidescreen (GPL-3.0), built unchanged from commit 347b1d2:
+  https://github.com/AeroWidescreen/NFSMWFEShadows
+The GPL source of the three GPL plugins is at those links and commits; our build scripts are in our public source.
+
+Downloaded by you and applied by the installer (not in this package)
+---------------------------------------------------------------------
+- Xbox 360 Stuff Pack 4.2 by elaymm4 and contributors (Toru the Red Fox, xan1242, Aero_, TMCharly, osdever), with
+  NFSMW_XenonEffects (xan1242 / Toru the Red Fox) and X360Stuff: https://nfsmods.xyz/mod/1200
+- Xbox 360 converted movies by elaymm4: https://nfsmods.xyz/mod/3006
+- Recompiled Vinyls 1024x by nlgxzef: https://nfsmods.xyz/mod/629
+- ReTex 2.02 by C i P H E R: https://www.nfsaddons.com/downloads/nfsmw/tools/10723/need-for-speed-most-wanted-retex-202.html
+- NFSMW Unlimiter by nlgxzef: https://github.com/nlgxzef/NFSMWUnlimiter
+- 1971 Dodge Challenger R/T 440 add-on by nlgxzef: https://nfsmods.xyz/mod/754
+- Fast & Furious Flip Car by VeeTec (Vee-Tec) and RisaDriftR: https://nfsmods.xyz/mod/5194
+- Bugatti Chiron add-on by Eclipse72rus: https://nfsmods.xyz/mod/697
+- 2011 Ford F-150 SVT Raptor by Greger, add-on conversion by ElNico: https://nfsmods.xyz/mod/1696
+- Longnose Cab Semi Truck add-on by UndercoverBoy833: https://nfsmods.xyz/mod/3803
+- Dodge Tomahawk add-on by Riverflo (its car type is the Thar's template): https://nfsmods.xyz/mod/5882
+- Tools run during the install: Attribulator 2.0.0 by NFSTools (https://github.com/NFSTools/Attribulator),
+  Binarius 2.10.4 by nlgxzef (GPL-3.0, https://github.com/nlgxzef/Binarius), .NET 8 runtime by Microsoft (MIT).
+
+Research and references
+-----------------------
+- Game decompilation and symbol map: https://github.com/dbalatoni13/nfsmw (CC0)
+- Telemetry addresses: https://github.com/muki01/NFS_Most_Wanted_Telemetry_Dashboard (MIT)
+- Music system hook locations: https://github.com/xan1242/XNFSMusicPlayer (MIT)
+- The game's control layout: https://github.com/s-b-repo/nfsmw-2005-sdk
+- Techniques: "Scalable Ambient Obscurance" (McGuire, Mara and Luebke, 2012); FXAA 3.11 (Timothy Lottes, NVIDIA,
+  2011); "Volumetric Light Scattering as a Post-Process" (Mitchell, GPU Gems 3, 2007).

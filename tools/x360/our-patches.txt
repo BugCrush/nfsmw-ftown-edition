@@ -1,0 +1,20 @@
+# The places in speed.exe v1.3 our own plugins patch, for patchmap_check.py.
+# <0xADDRESS | DLL!function>  <our module>  <what it is>
+# MusicBridge: code detours (music/src/MusicBridge.cpp kBuilder, kPickerFn, kLookup, kNextSongFn) and
+# function-table slots of the stream channel (kSlotStop, kSlotTimeLeft, kSlotPlay, kSlotVolume).
+0x4DF330 MusicBridge.asi music: pick builder
+0x4F4CD0 MusicBridge.asi music: song picker
+0x82BFD0 MusicBridge.asi music: event lookup
+0x517070 MusicBridge.asi music: next song
+0x8C5F3C MusicBridge.asi music: channel stop slot
+0x8C5F50 MusicBridge.asi music: channel time-left slot
+0x8C5F58 MusicBridge.asi music: channel play slot
+0x8C5F60 MusicBridge.asi music: channel volume slot
+# InputBridge: the DirectInput import (input/src/InputBridge.cpp PatchImport)
+DINPUT8.dll!DirectInput8Create InputBridge.asi controller: DirectInput
+# GfxProbe: the Direct3D and D3DX imports (gfx/src/GfxProbe.cpp, gfx/src/effects.cpp)
+d3d9.dll!Direct3DCreate9 GfxProbe.asi probe: Direct3D
+# VisualBridge wraps GfxProbe on the D3DX import (visual/src/VisualBridge.cpp PatchImport): either may be the owner
+d3dx9_26.dll!D3DXCreateEffectFromResourceA GfxProbe.asi|VisualBridge.asi probe and picture: effects
+# ReflectRate: the face test in the reflection loop (reflect/src/ReflectRate.cpp kSite), 9 bytes from here
+0x6DE680 ReflectRate.asi reflection: face due?

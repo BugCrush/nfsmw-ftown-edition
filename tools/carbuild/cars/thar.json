@@ -1,0 +1,88 @@
+{
+  "car": "THAR",
+  "source": ".superpowers/downloads/cars/thar/blendswap/Mahindra Thar 3D Model.blend",
+  "credit": "Mahindra Thar 3D Model, Blendswap 31849 by aakash2__2, CC-BY",
+  "length": 3.99,
+  "ride_height_cm": 9.3,
+  "source_axes": "front -Y, left +X, up +Z (game: front +X, left +Y, up +Z: a +90 degree turn about Z)",
+  "subsurf_max": 0,
+  "subsurf_max_objects": {},
+  "drop": ["Plane.005", "Cutter*", "WIper's"],
+  "pre_decimate": {
+    "Mahindra Logo": 0.12, "Thar Side Logo": 0.12, "4x4 Logo": 0.15, "Thar Front Logo": 0.15, "m_HAWK130": 0.15,
+    "Plane.003": 0.15, "Spare_Wheel_Rim": 0.2, "Wheel_alloys final": 0.25, "Wheel_alloys": 0.3,
+    "Circle.004": 0.3, "Circle.005": 0.3, "Circle.007": 0.3
+  },
+  "material_for_unassigned": {
+    "Wheel_alloys": "Metal_Chrome", "Disc Brake": "Metal_Brake_Disc", "Spare Wheel Support": "Plastic_Black_Dull",
+    "Spare Wheel Support Bolt": "Metal_Chrome", "Bonet_upper panel.016": "Plastic_Black_Dull",
+    "Bonet_upper panel.031": "Plastic_Black_Dull", "Bonet_upper panel.040": "Plastic_Black_Dull",
+    "Back Panel_bottom.001": "Plastic_Black_Dull", "Back Panel_bottom": "Plastic_Black_Dull",
+    "Antena_nut": "Metal_Chrome", "Bonet_upper panel.059": "Metal_Chrome_TailLight"
+  },
+  "wheel": {
+    "objects": ["Wheel_Tyre", "Wheel_alloys final", "Wheel_alloys", "Disc Brake"],
+    "tyre_object": "Wheel_Tyre",
+    "part": "KIT00_FRONT_TIRE"
+  },
+  "rules": [
+    {"objects": ["Bonet_upper panel.005"], "part": "KIT00_FRONT_WINDOW"},
+    {"objects": ["Bonet_upper panel.033"], "part": "KIT00_REAR_WINDOW"},
+    {"objects": ["Bonet_upper panel.015"], "part": "KIT00_FRONT_{SIDE}_WINDOW", "split": "side"},
+    {"objects": ["Bonet_upper panel.009"], "part": "KIT00_REAR_{SIDE}_WINDOW", "split": "side"},
+    {"objects": ["Circle", "Circle.001", "Circle.008", "Bonet_upper panel.054", "Bonet_upper panel.059"],
+     "materials": ["Glass_Clear"], "part": "KIT00_{SIDE}_HEADLIGHT_GLASS", "split": "side"},
+    {"objects": ["Circle", "Circle.001", "Circle.008", "Bonet_upper panel.054", "Bonet_upper panel.059"],
+     "part": "KIT00_{SIDE}_HEADLIGHT", "split": "side"},
+    {"objects": ["Bonet_upper panel.043"], "part": "KIT00_{SIDE}_BRAKELIGHT_GLASS", "split": "side"},
+    {"objects": ["Bonet_upper panel.001", "Bonet_upper panel.044"], "part": "KIT00_{SIDE}_BRAKELIGHT",
+     "split": "side"},
+    {"objects": ["Bonet_upper panel.055", "Bonet_upper panel.053"], "part": "KIT00_{SIDE}_SIDE_MIRROR",
+     "split": "side"},
+    {"objects": ["Bonet_upper panel.040"], "part": "BASE"},
+    {"objects": ["*"], "part": "KIT00_BODY"}
+  ],
+  "budget_A": {"KIT00_BODY": 19500, "BASE": 1200, "KIT00_FRONT_TIRE": 4000, "*": 2000},
+  "donor": "GTI",
+  "interior": {"donor": "SL65", "chosen_by": "tools/carbuild/interior.py choose_donor (tests/test_interior.py)"},
+  "palette": {
+    "black": [12, 12, 12], "dark_grey": [40, 40, 42], "grey": [95, 95, 98], "silver": [170, 172, 176],
+    "chrome": [205, 207, 212], "mirror": [190, 200, 210], "tyre": [16, 16, 16], "disc": [100, 100, 104]
+  },
+  "materials": {
+    "Car Paint": {"role": "paint"},
+    "Glass_Black": {"role": "window"},
+    "Glass_Clear": {"role": "window"},
+    "Glass_Red": {"role": "brakelight_glass"},
+    "Metal_Chrome": {"role": "chrome", "colour": "chrome"},
+    "Metal_Chrome_TailLight": {"role": "chrome", "colour": "chrome"},
+    "Mirror": {"role": "chrome", "colour": "mirror"},
+    "Plastic_Silver_Semi_Bumpy.Tiny": {"role": "chrome", "colour": "silver"},
+    "Metal_Black_Semi_Bumpy.Small": {"role": "dullplastic", "colour": "black"},
+    "Plastic_Black_Dull": {"role": "dullplastic", "colour": "black"},
+    "Plastic_Black_Gloss": {"role": "dullplastic", "colour": "black"},
+    "Plastic_Black_Semi_Bumpy.Big": {"role": "dullplastic", "colour": "black"},
+    "Plastic_Black_Semi_Bumpy.Med": {"role": "dullplastic", "colour": "black"},
+    "Plastic_Grey.Dark_Dull": {"role": "dullplastic", "colour": "dark_grey"},
+    "Plastic_Grey.Dark_Semi_Bumpy.Med": {"role": "dullplastic", "colour": "dark_grey"},
+    "Plastic_Grey_Semi_Bumpy.Small": {"role": "dullplastic", "colour": "grey"},
+    "Tire": {"role": "rubber", "colour": "tyre"},
+    "Metal_Brake_Disc": {"role": "brakedisc", "colour": "disc"}
+  },
+  "part_materials": [
+    {"parts": ["*_HEADLIGHT_GLASS"], "materials": {"Glass_Clear": {"role": "headlight_glass"}}},
+    {"parts": ["*_HEADLIGHT"], "materials": {"Metal_Chrome_TailLight": {"role": "headlight"}}},
+    {"parts": ["*_BRAKELIGHT"], "materials": {"*": {"role": "brakelight"}}},
+    {"parts": ["KIT00_FRONT_TIRE"], "materials": {"Metal_Chrome": {"role": "rim", "colour": "silver"}}}
+  ],
+  "lights": {
+    "headlight_off": [200, 200, 195, 255], "headlight_on": [255, 255, 245, 255],
+    "headlight_glass_off": [210, 215, 220, 90], "headlight_glass_on": [255, 255, 250, 150],
+    "brakelight_off": [70, 6, 6, 255], "brakelight_on": [255, 110, 80, 255],
+    "brakelight_glass_off": [150, 15, 15, 200], "brakelight_glass_on": [255, 60, 45, 110]
+  },
+  "exhaust": {"name": "LEFT_EXHAUST", "x_from_rear": 0.15, "y": 0.45, "z": 0.05},
+  "lod_ratios": {"B": 0.5, "C": 0.25, "D": 0.12, "E": 0.06},
+  "levels": {"KIT00_BODY": "ABCDE", "KIT00_LEFT_BRAKELIGHT_GLASS": "ABC", "KIT00_RIGHT_BRAKELIGHT_GLASS": "ABC",
+             "*": "ABCD"}
+}

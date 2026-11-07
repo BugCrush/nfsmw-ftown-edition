@@ -1,0 +1,16 @@
+{
+ "name": "F-Town minimap",
+ "file": "ftown-minimap.bun",
+ "bytes": 4205312,
+ "sha256": "7aabe8751eef7b2ecc33a7f699c37c67275ded54997e4c5acdece8e00516b780",
+ "header": "FTOWN_MAP",
+ "upper_left": [
+  -560.0,
+  6508.0
+ ],
+ "width_m": 5120.0,
+ "chops": 64,
+ "chop_px": 256,
+ "metres_per_pixel": 2.5,
+ "note": "derived from OpenStreetMap data (c) OpenStreetMap contributors (ODbL); built by tools/citymap/minimap.py"
+}

@@ -1,0 +1,186 @@
+game MW
+// Longnose Cab tuning (the user, 2026-10-31): "as fast as the raptor and 2x as heavy as the raptor". Weight 14,000 kg
+// (the tuned Raptor's 7,000 x 2). The truck takes the tuned Raptor's drivetrain and tyre size (raptor.nfsms v2 values,
+// read from the game's database) with every force doubled, so twice the force on twice the weight moves it like the
+// Raptor: torque x2, the Raptor's rev range, gears, final gear, differential and torque split (same tyre size, so the
+// same speed per rev), the Raptor's grip coefficients (grip scales with the weight on the tyres), brakes and handbrake
+// x2, drag and downforce x2; the truck's own turbo zeroed (the Raptor has none). Both stages (stock and _top).
+// v2 (the user, after the first race: half the Raptor's acceleration, wheelspin): GRIP_SCALE 2 in both stages, as
+// the game's tyre grip did not grow with the doubled weight.
+// v3 (the user, 2026-11-01, after screenshots showed the chassis scraping the road): suspension at twice the
+// Raptor's in each stage (springs, shock compression and rebound, anti-roll bars); ride height, travel and
+// progression stay the mod's. Grip back to 1: x2 did not help (v2), the wheelspin came from the scraping.
+// v4 (the user, 2026-11-01: the truck drifts whenever it turns): the tuned Raptor's handling values in each stage,
+// so the truck is physically the Raptor at twice the weight and force: tyre STEERING, YAW_SPEED, YAW_CONTROL (the
+// truck's stability help was nearly off at speed: 0.1 against 0.95), BRAKE_LOCK (rear 3.5 against 1.7), the
+// physics geometry (WHEEL_BASE, TRACK_WIDTH, FRONT_AXLE, FRONT_WEIGHT_BIAS, ROLL_CENTER, AERO_CG), shock valving,
+// digression, spring progression, SHOCK_BLOWOUT, and TENSOR_SCALE (2 against 2.87). Ride height and travel stay.
+// Generated from the unpacked database; the truck's looks, cameras, suspension and steering stay the mod's.
+update_field pvehicle longnosecab MASS 14000
+update_field engine longnosecab TORQUE[0] 1526.2
+update_field engine longnosecab TORQUE[1] 2244.3999
+update_field engine longnosecab TORQUE[2] 2729.3999
+update_field engine longnosecab TORQUE[3] 3079.3999
+update_field engine longnosecab TORQUE[4] 3286
+update_field engine longnosecab TORQUE[5] 3384.8
+update_field engine longnosecab TORQUE[6] 3187.2
+update_field engine longnosecab TORQUE[7] 2864
+update_field engine longnosecab TORQUE[8] 2495.8
+update_field engine longnosecab RED_LINE 6000
+update_field engine longnosecab MAX_RPM 7000
+update_field engine longnosecab IDLE 900
+update_field engine longnosecab FLYWHEEL_MASS 14
+update_field engine longnosecab ENGINE_BRAKING[0] 0.4
+update_field engine longnosecab ENGINE_BRAKING[1] 0.45
+update_field engine longnosecab ENGINE_BRAKING[2] 0.55
+update_field transmission longnosecab GEAR_RATIO[0] 3
+update_field transmission longnosecab GEAR_RATIO[1] 0
+update_field transmission longnosecab GEAR_RATIO[2] 3.57
+update_field transmission longnosecab GEAR_RATIO[3] 2.04
+update_field transmission longnosecab GEAR_RATIO[4] 1.34
+update_field transmission longnosecab GEAR_RATIO[5] 1
+update_field transmission longnosecab GEAR_RATIO[6] 0.82
+update_field transmission longnosecab GEAR_RATIO[7] 0.68
+update_field transmission longnosecab DIFFERENTIAL[0] 0.5
+update_field transmission longnosecab DIFFERENTIAL[1] 0.5
+update_field transmission longnosecab DIFFERENTIAL[2] 0.5
+update_field transmission longnosecab FINAL_GEAR 5.3
+update_field transmission longnosecab TORQUE_CONVERTER 0.7
+update_field transmission longnosecab TORQUE_SPLIT 0.5
+update_field tires longnosecab STATIC_GRIP Front 2.65
+update_field tires longnosecab STATIC_GRIP Rear 2.65
+update_field tires longnosecab DYNAMIC_GRIP Front 2.4
+update_field tires longnosecab DYNAMIC_GRIP Rear 2.4
+update_field tires longnosecab GRIP_SCALE Front 1
+update_field tires longnosecab GRIP_SCALE Rear 1
+update_field tires longnosecab SECTION_WIDTH Front 315
+update_field tires longnosecab SECTION_WIDTH Rear 315
+update_field tires longnosecab ASPECT_RATIO Front 70
+update_field tires longnosecab ASPECT_RATIO Rear 70
+update_field tires longnosecab RIM_SIZE Front 17
+update_field tires longnosecab RIM_SIZE Rear 17
+update_field brakes longnosecab BRAKES Front 1924
+update_field brakes longnosecab BRAKES Rear 2875.6001
+update_field brakes longnosecab EBRAKE 3380
+update_field chassis longnosecab DRAG_COEFFICIENT 0.44
+update_field chassis longnosecab AERO_COEFFICIENT 0.33
+update_field induction longnosecab PSI 0
+update_field induction longnosecab HIGH_BOOST 0
+update_field induction longnosecab LOW_BOOST 0
+update_field induction longnosecab SPOOL 0
+update_field induction longnosecab VACUUM 0
+update_field engine longnosecab_top TORQUE[0] 3645
+update_field engine longnosecab_top TORQUE[1] 4516
+update_field engine longnosecab_top TORQUE[2] 7254.2002
+update_field engine longnosecab_top TORQUE[3] 8250.7998
+update_field engine longnosecab_top TORQUE[4] 8816.4004
+update_field engine longnosecab_top TORQUE[5] 9094.7998
+update_field engine longnosecab_top TORQUE[6] 8547
+update_field engine longnosecab_top TORQUE[7] 7649.2002
+update_field engine longnosecab_top TORQUE[8] 6491
+update_field engine longnosecab_top RED_LINE 6500
+update_field engine longnosecab_top MAX_RPM 7500
+update_field engine longnosecab_top IDLE 900
+update_field engine longnosecab_top FLYWHEEL_MASS 14
+update_field engine longnosecab_top ENGINE_BRAKING[0] 0.4
+update_field engine longnosecab_top ENGINE_BRAKING[1] 0.45
+update_field engine longnosecab_top ENGINE_BRAKING[2] 0.55
+update_field transmission longnosecab_top GEAR_RATIO[0] 2.75
+update_field transmission longnosecab_top GEAR_RATIO[1] 0
+update_field transmission longnosecab_top GEAR_RATIO[2] 3.57
+update_field transmission longnosecab_top GEAR_RATIO[3] 2.04
+update_field transmission longnosecab_top GEAR_RATIO[4] 1.34
+update_field transmission longnosecab_top GEAR_RATIO[5] 1
+update_field transmission longnosecab_top GEAR_RATIO[6] 0.82
+update_field transmission longnosecab_top GEAR_RATIO[7] 0.68
+update_field transmission longnosecab_top DIFFERENTIAL[0] 0.5
+update_field transmission longnosecab_top DIFFERENTIAL[1] 0.5
+update_field transmission longnosecab_top DIFFERENTIAL[2] 0.5
+update_field transmission longnosecab_top FINAL_GEAR 4.5
+update_field transmission longnosecab_top TORQUE_CONVERTER 0.2
+update_field transmission longnosecab_top TORQUE_SPLIT 0.5
+update_field tires longnosecab_top STATIC_GRIP Front 3.1
+update_field tires longnosecab_top STATIC_GRIP Rear 3.1
+update_field tires longnosecab_top DYNAMIC_GRIP Front 2.9
+update_field tires longnosecab_top DYNAMIC_GRIP Rear 2.9
+update_field tires longnosecab_top GRIP_SCALE Front 1
+update_field tires longnosecab_top GRIP_SCALE Rear 1
+update_field tires longnosecab_top SECTION_WIDTH Front 315
+update_field tires longnosecab_top SECTION_WIDTH Rear 315
+update_field tires longnosecab_top ASPECT_RATIO Front 70
+update_field tires longnosecab_top ASPECT_RATIO Rear 70
+update_field tires longnosecab_top RIM_SIZE Front 17
+update_field tires longnosecab_top RIM_SIZE Rear 17
+update_field brakes longnosecab_top BRAKES Front 3062.8
+update_field brakes longnosecab_top BRAKES Rear 3582.8
+update_field brakes longnosecab_top EBRAKE 5148
+update_field chassis longnosecab_top DRAG_COEFFICIENT 0.44
+update_field chassis longnosecab_top AERO_COEFFICIENT 0.51
+update_field induction longnosecab_top PSI 0
+update_field induction longnosecab_top HIGH_BOOST 0
+update_field induction longnosecab_top LOW_BOOST 0
+update_field induction longnosecab_top SPOOL 0
+update_field induction longnosecab_top VACUUM 0
+update_field chassis longnosecab SPRING_STIFFNESS Front 1440
+update_field chassis longnosecab SPRING_STIFFNESS Rear 1420
+update_field chassis longnosecab SHOCK_STIFFNESS Front 62
+update_field chassis longnosecab SHOCK_STIFFNESS Rear 58
+update_field chassis longnosecab SHOCK_EXT_STIFFNESS Front 102
+update_field chassis longnosecab SHOCK_EXT_STIFFNESS Rear 98
+update_field chassis longnosecab SWAYBAR_STIFFNESS Front 570
+update_field chassis longnosecab SWAYBAR_STIFFNESS Rear 550
+update_field chassis longnosecab_top SPRING_STIFFNESS Front 1200
+update_field chassis longnosecab_top SPRING_STIFFNESS Rear 1200
+update_field chassis longnosecab_top SHOCK_STIFFNESS Front 120
+update_field chassis longnosecab_top SHOCK_STIFFNESS Rear 120
+update_field chassis longnosecab_top SHOCK_EXT_STIFFNESS Front 160
+update_field chassis longnosecab_top SHOCK_EXT_STIFFNESS Rear 160
+update_field chassis longnosecab_top SWAYBAR_STIFFNESS Front 570
+update_field chassis longnosecab_top SWAYBAR_STIFFNESS Rear 550
+update_field tires longnosecab STEERING 1
+update_field tires longnosecab YAW_SPEED 0.4
+update_field tires longnosecab YAW_CONTROL[0] 0.3
+update_field tires longnosecab YAW_CONTROL[1] 0.6
+update_field tires longnosecab YAW_CONTROL[2] 0.7
+update_field tires longnosecab YAW_CONTROL[3] 0.95
+update_field brakes longnosecab BRAKE_LOCK Front 0.9
+update_field brakes longnosecab BRAKE_LOCK Rear 1.7
+update_field chassis longnosecab WHEEL_BASE 3.37
+update_field chassis longnosecab FRONT_AXLE 1.42
+update_field chassis longnosecab FRONT_WEIGHT_BIAS 53.8
+update_field chassis longnosecab ROLL_CENTER 9.5
+update_field chassis longnosecab AERO_CG 50.56
+update_field chassis longnosecab SHOCK_BLOWOUT 10
+update_field chassis longnosecab TRACK_WIDTH Front 1.865
+update_field chassis longnosecab TRACK_WIDTH Rear 1.865
+update_field chassis longnosecab SHOCK_VALVING Front 18
+update_field chassis longnosecab SHOCK_VALVING Rear 18
+update_field chassis longnosecab SHOCK_DIGRESSION Front 0.45
+update_field chassis longnosecab SHOCK_DIGRESSION Rear 0.45
+update_field chassis longnosecab SPRING_PROGRESSION Front 7.9
+update_field chassis longnosecab SPRING_PROGRESSION Rear 7.7
+update_field tires longnosecab_top STEERING 0.9
+update_field tires longnosecab_top YAW_SPEED 0.4
+update_field tires longnosecab_top YAW_CONTROL[0] 0.5
+update_field tires longnosecab_top YAW_CONTROL[1] 0.8
+update_field tires longnosecab_top YAW_CONTROL[2] 1.2
+update_field tires longnosecab_top YAW_CONTROL[3] 1.5
+update_field brakes longnosecab_top BRAKE_LOCK Front 1
+update_field brakes longnosecab_top BRAKE_LOCK Rear 1.9
+update_field chassis longnosecab_top WHEEL_BASE 3.37
+update_field chassis longnosecab_top FRONT_AXLE 1.42
+update_field chassis longnosecab_top FRONT_WEIGHT_BIAS 53
+update_field chassis longnosecab_top ROLL_CENTER 9
+update_field chassis longnosecab_top AERO_CG 50.6
+update_field chassis longnosecab_top SHOCK_BLOWOUT 10
+update_field chassis longnosecab_top TRACK_WIDTH Front 1.865
+update_field chassis longnosecab_top TRACK_WIDTH Rear 1.865
+update_field chassis longnosecab_top SHOCK_VALVING Front 20
+update_field chassis longnosecab_top SHOCK_VALVING Rear 20
+update_field chassis longnosecab_top SHOCK_DIGRESSION Front 0.2
+update_field chassis longnosecab_top SHOCK_DIGRESSION Rear 0.2
+update_field chassis longnosecab_top SPRING_PROGRESSION Front 10
+update_field chassis longnosecab_top SPRING_PROGRESSION Rear 10
+update_field pvehicle longnosecab TENSOR_SCALE X 1
+update_field pvehicle longnosecab TENSOR_SCALE Y 2.87
+update_field pvehicle longnosecab TENSOR_SCALE Z 1

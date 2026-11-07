@@ -1,0 +1,141 @@
+{
+ "note": "F-Town's road network for the game's AI (tools/citymap/roadnet_build.py), derived from OpenStreetMap data (c) OpenStreetMap contributors (ODbL); the file itself is git-ignored",
+ "file": "ftown-roadnet.bin",
+ "bytes": 916424,
+ "sha256": "df0d12c82a62a99c9570bd25bbf440edbeee827c25dba4fd842ade2f9e52d17d",
+ "counts": {
+  "profiles": 13,
+  "nodes": 12428,
+  "segments": 15316,
+  "decision_segments": 6023,
+  "road_segments": 9293,
+  "roads": 3135,
+  "junctions": 1933,
+  "cells": 2461,
+  "cell_tags": 26184,
+  "max_tags_in_a_cell": 76,
+  "one_way_segments": 1889,
+  "no_traffic_segments": 4794,
+  "curved_segments": 5772,
+  "dead_end_closed": 2245
+ },
+ "km": 239.2,
+ "km_by_kind": {
+  "living_street": 4.9,
+  "motorway": 4.8,
+  "motorway_link": 0.2,
+  "residential": 148.5,
+  "secondary": 11.8,
+  "secondary_link": 0.4,
+  "service": 26.8,
+  "tertiary": 32.5,
+  "tertiary_link": 0.8,
+  "trunk": 7.9,
+  "trunk_link": 0.6
+ },
+ "kmh_by_kind": {
+  "motorway": 80,
+  "motorway_link": 40,
+  "trunk": 70,
+  "trunk_link": 40,
+  "primary": 60,
+  "primary_link": 40,
+  "secondary": 55,
+  "secondary_link": 40,
+  "tertiary": 45,
+  "tertiary_link": 40,
+  "residential": 35,
+  "unclassified": 35,
+  "road": 35,
+  "living_street": 20,
+  "service": 20
+ },
+ "max_curve_error_m": 0.68,
+ "rockport": {
+  "profiles": 710,
+  "nodes": 4385,
+  "segments": 6538,
+  "roads": 1308,
+  "grid_min": [
+   -4800.0,
+   -1664.0
+  ],
+  "edge": 64.0,
+  "rows": 103,
+  "cols": 92
+ },
+ "grid_pad_cols": 102,
+ "grid_min_x_widened": -11328.0,
+ "events": {
+  "drag": {
+   "route": 36,
+   "exits": 4
+  },
+  "speedtrap": {
+   "route": 139,
+   "exits": 8
+  },
+  "sprint": {
+   "route": 160,
+   "exits": 114
+  },
+  "timeattack": {
+   "route": 176,
+   "exits": 112
+  }
+ },
+ "parking": {
+  "spots": 2427,
+  "kept": 312
+ },
+ "nodes_z": [
+  98.25,
+  205.0
+ ],
+ "built_from": {
+  "roads": "c8eba2163d4628b27ecfe3ebe5e05358e2e5fc59c688e2a67bb6dea227f74275",
+  "city": "c16b1be1d8f20e9d96a35c67666cc6dd64fd63f84498f900719f440e47addf9a",
+  "events": "b3c78136bc37c586078bfcbfdb5c507be23cbe2b4b91b2d356f1dc02eaffd2b4",
+  "traffic": "cfcb09e86ebeb5180b3fa45db44157503e9899c640a0d3c263b3d62be833af40"
+ },
+ "box": [
+  644.56,
+  7087.09,
+  3355.44,
+  11048.91
+ ],
+ "link": {
+  "joins": [
+   {
+    "rock_node": 259,
+    "before": [
+     2234,
+     262,
+     261
+    ],
+    "added": 21851
+   },
+   {
+    "rock_node": 260,
+    "before": [
+     2240,
+     261,
+     266
+    ],
+    "added": 21852
+   },
+   {
+    "rock_node": 261,
+    "before": [
+     2241,
+     266,
+     262
+    ],
+    "added": 21853
+   }
+  ],
+  "rock_cells": 10,
+  "rock_cell_tags": 29,
+  "segments": 92
+ }
+}

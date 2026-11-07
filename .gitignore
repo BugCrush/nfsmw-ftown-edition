@@ -1,0 +1,188 @@
+# Game data is EA's copyrighted content: never commit it.
+# Ignore everything in the game folder, then allow only the files we added or changed.
+/Need For Speed Most Wanted Black Edition/*
+!/Need For Speed Most Wanted Black Edition/scripts/
+!/Need For Speed Most Wanted Black Edition/dxvk.conf
+!/Need For Speed Most Wanted Black Edition/d3d9.dll
+!/Need For Speed Most Wanted Black Edition/dinput8.dll
+
+# FPS recordings and logs are regenerated every session.
+/fps-capture/*.csv
+/fps-capture/*.log
+
+# Build output; the installed copy lives in the game's scripts folder.
+/fps-capture/src/*.asi
+/fps-capture/src/*.lib
+/fps-capture/src/*.pdb
+/input/src/*.asi
+/input/src/*.lib
+/input/src/*.pdb
+/Need For Speed Most Wanted Black Edition/scripts/*.log
+
+# Save-file backups made by tools/mw-controls.py (personal game data).
+/tools/save-backups/
+/tools/diag/*.asi
+
+# Telemetry CSVs written by InputBridge.
+/telemetry/
+
+# Local toolchain (Zig), downloaded per README.
+/.tools/
+
+# GfxProbe screenshots (large) and build output.
+/gfx-captures/
+/gfx/src/*.asi
+/gfx/src/*.lib
+/gfx/src/*.pdb
+
+# Music plugin build output and test files.
+/music/src/*.asi
+/music/src/*.lib
+/music/src/*.pdb
+/music/tests/*.exe
+/music/tests/*.asi
+/music/tests/*.log
+/music/tests/*.ini
+/music/tests/*.pdb
+/music/tests/*.lib
+/music/tests/fixtures/
+/music/tests/fixtures-songs/
+/music/tests/fixtures-empty/
+/music/tests/fixtures-300/
+
+# Add-on cars plugin build output and test files.
+/cars/src/*.asi
+/cars/src/*.lib
+/cars/src/*.pdb
+/cars/tests/*.exe
+/cars/tests/*.asi
+/cars/tests/*.log
+/cars/tests/*.ini
+/cars/tests/*.pdb
+/cars/tests/*.lib
+/cars/tests/out/
+# CarStable's run-time files in the game (regenerated; CarStable.fingerprints is also kept in the game's records)
+/Need For Speed Most Wanted Black Edition/scripts/CarStable.defaults.bin
+/Need For Speed Most Wanted Black Edition/scripts/CarStable.fingerprints
+/Need For Speed Most Wanted Black Edition/scripts/CarStable.pending
+# The Nikki exporter's build output (with copies of Binarius's Nikki.dll)
+/tools/cars/nikki-export/out/
+
+# F-Town: WorldProbe's build output and stand-in test runs (world data extracted for research stays in
+# .superpowers/world/, ignored below with the rest of .superpowers/).
+/world/src/*.asi
+/world/src/*.lib
+/world/src/*.pdb
+/world/tests/*.exe
+/world/tests/*.pdb
+/world/tests/*.lib
+/world/tests/out/
+
+# The user's own music for the custom-songs work: never commit it.
+/CUSTOM SONGS/
+
+# Plan-execution scratch (progress ledgers, code checked before it goes into a plan).
+/.superpowers/
+
+# Session handoff notes for our agents: local only.
+/session-start-prompt.md
+__pycache__/
+
+# Per-song play modes written by MusicBridge (the user's own settings and song names).
+/Need For Speed Most Wanted Black Edition/scripts/MusicBridge.songs.ini
+
+# Originals of songs changed by tools/mp3-trim.py (the user's music).
+/song-backups/
+
+# Controller plugin test builds and their logs.
+/input/tests/*.exe
+/input/tests/*.asi
+/input/tests/*.pdb
+/input/tests/*.lib
+/input/tests/*.log
+/input/tests/*.ini
+
+# GfxProbe stand-in builds and their output (may hold a copy of DXVK's d3d9.dll, images, shader files).
+/gfx/tests/out/
+
+# VisualBridge build output and stand-in runs.
+/visual/src/*.asi
+/visual/src/*.lib
+/visual/src/*.pdb
+/visual/tools/*.exe
+/visual/tools/*.pdb
+/visual/tests/out/
+/reflect/src/*.asi
+/reflect/src/*.lib
+/reflect/src/*.pdb
+/reflect/tests/out/
+/modes/src/*.asi
+/modes/src/*.lib
+/modes/src/*.pdb
+/modes/tests/out/
+
+# Companions we build: upstream source copies and build output
+/companions/*/src/
+/companions/*/out/
+/companions/*.exe
+/companions/*/*.exe
+/companions/*/*.o
+/companions/*.pdb
+/companions/*/*.pdb
+/tools/diag/tests/out/
+
+# Xbox 360 pack: its texture pack is data (never committed). Its plugin binaries and .ini files are committed
+# (user, 2026-10-15); everything else the pack adds lives outside scripts\ and stays ignored.
+/Need For Speed Most Wanted Black Edition/scripts/XenonEffects.tpk
+
+# Test copies of the game, beside the game folder (the user, 2026-10-16: nothing outside the project folder)
+/Need For Speed Most Wanted Black Edition - */
+# F-Town loader: build output and stand-in test runs (ftown/ftown-slab.bun is ours and committed; the relocated
+# Rockport section is game data and lives in .superpowers/world/).
+/ftown/src/*.asi
+/ftown/src/*.lib
+/ftown/src/*.pdb
+/ftown/tests/*.exe
+/ftown/tests/*.pdb
+/ftown/tests/*.lib
+/ftown/tests/out/
+# F-Town stage 2: the city file and the road model are derived from OpenStreetMap data (ODbL) and large: rebuilt by
+# tools/citymap/build_city.py, never committed (ftown/ftown-city.json, spawns and counts, is committed).
+/ftown/ftown-city.bun
+# the evening's lights list, written with the city (offsets into it: tools/citymap/evening.py; counts in ftown-city.json)
+/ftown/ftown-evening.bin
+# the minimap's 64 map pieces, drawn from the same OSM road model (tools/citymap/minimap.py; ftown/ftown-minimap.json
+# with its numbers is committed)
+/ftown/ftown-minimap.bun
+# the Time Attack's race barriers, from the same road model (tools/citymap/race_barriers.py; ftown/ftown-barriers.json
+# with its numbers is committed)
+/ftown/ftown-barriers.bun
+# the other events' race barriers (race_barriers.build_events; ftown/ftown-barriers-<event>.json committed)
+/ftown/ftown-barriers-*.bun
+ftown-roads.json
+# the user's own photos of their city (F-Town reference): never committed
+/ftownphotos/
+# the menu icons' texture pack built from them (tools/ftownicons/make_icons.py), never committed either
+/ftown/ftown-icons.bun
+# F-Town's road network for the AI, from the same road model (tools/citymap/roadnet_build.py; ftown/ftown-roadnet.json
+# committed)
+/ftown/ftown-roadnet.bin
+# the breakable poles' spawner records, written with the city (tools/world/smackables.py; counts in ftown-city.json)
+/ftown/ftown-smackables.bun
+# the road to Rockport and its run-time data (tools/citymap/connector.py: the data holds numbers read from the game's
+# track file; ftown/ftown-connector.json, its numbers, is committed)
+/ftown/ftown-connector.bun
+/ftown/ftown-connect.bin
+
+# The public mod package: build output, work folders and the cleaned public snapshot (release/).
+/release/dist/
+/release/build/
+/release/public-repo/
+/release/*-work/
+/release/audit-thar/
+/release/payload-cache/
+/release/**/__pycache__/
+
+# F-Town data installed in the game (built files, git-ignored in ftown/ too) and the user's race times
+/Need For Speed Most Wanted Black Edition/scripts/ftown-*
+/Need For Speed Most Wanted Black Edition/scripts/FTownTimes.txt

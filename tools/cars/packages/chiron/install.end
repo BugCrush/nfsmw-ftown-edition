@@ -1,0 +1,30 @@
+[VERSN2]
+// Bugatti Chiron (Eclipse72rus, nfsmods.xyz/mod/697) as a Binarius install, made by us: the mod itself installs with
+// whole replacement game files ("First mod") or an old GUI tool. Its car parts and car type were exported from its
+// "First mod" GlobalB.lzc with tools/cars/extract_car.py (into ..\..\..\..\.superpowers\downloads\cars\697\extracted);
+// it has no collision of its own: its database script sets MODEL Visual CHIRON and, last, MODEL Collision FORDGT
+// (VltEd keeps the parts apart; Attribulator holds one name, CHIRON), so the Ford GT's collision is copied under its
+// name (tools/x360/nfsms.py model_collisions).
+unlock_memory all
+
+if directory_exists absolute "CARS\CHIRON"
+do // nothing
+else
+create_folder absolute "CARS\CHIRON"
+end
+move_file override relative absolute "..\..\..\..\.superpowers\downloads\cars\697\files\Main files\CARS\CHIRON\GEOMETRY.BIN" "CARS\CHIRON\GEOMETRY.BIN"
+move_file override relative absolute "..\..\..\..\.superpowers\downloads\cars\697\files\Main files\CARS\CHIRON\textures.bin" "CARS\CHIRON\TEXTURES.BIN"
+move_file override relative absolute "..\..\..\..\.superpowers\downloads\cars\697\files\Main files\CARS\CHIRON\vinyls.bin" "CARS\CHIRON\VINYLS.BIN"
+
+import override GLOBAL\GLOBALB.LZC DBModelParts "..\..\..\..\.superpowers\downloads\cars\697\extracted\DBModelParts.bin"
+import override GLOBAL\GLOBALB.LZC CarTypeInfos "..\..\..\..\.superpowers\downloads\cars\697\extracted\CarTypeInfos.bin"
+copy_collection GLOBAL\GLOBALB.LZC Collisions FORDGT CHIRON
+
+if collection_exists FrontEnd\FrontB.lzc TPKBlocks DEFAULT
+do
+update_collection FrontEnd\FrontB.lzc TPKBlocks DEFAULT CollectionName FRONTENDTEXTURES
+else // do nothing
+end
+bind_textures synchronize FrontEnd\FrontB.lzc TPKBlocks FRONTENDTEXTURES "..\..\..\..\.superpowers\downloads\cars\697\files\Texture Compiler by MWInside\FRONTEND\Add\1"
+
+append strings.end

@@ -1,0 +1,13 @@
+# file name<TAB>title<TAB>artist   (UTF-8; the rule: split at the LAST underscore, trim spaces)
+Gunehgar_Divine.mp3	Gunehgar	Divine
+Joota Japani_Kr$na.mp3	Joota Japani	Kr$na
+Khatta Flow_Seedhe Maut ft. Kr$na.mp3	Khatta Flow	Seedhe Maut ft. Kr$na
+Maruti_Dhanda Nyoliwala, Miki Malang & Ron Likhari.mp3	Maruti	Dhanda Nyoliwala, Miki Malang & Ron Likhari
+Raat Ki Rani_Seedhe Maut.MP3	Raat Ki Rani	Seedhe Maut
+No Underscore Here.mp3	No Underscore Here	Unknown
+One_Two_Three.mp3	One_Two	Three
+  Spaced Out  _  The Band  .mp3	Spaced Out	The Band
+Trailing_.mp3	Trailing_	Unknown
+_Leading.mp3	_Leading	Unknown
+Dots.In.Title_A.B. Artist.mp3	Dots.In.Title	A.B. Artist
+तेरा नाम_कलाकार.mp3	तेरा नाम	कलाकार

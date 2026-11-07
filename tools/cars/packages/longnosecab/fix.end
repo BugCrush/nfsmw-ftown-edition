@@ -1,0 +1,5 @@
+[VERSN2]
+// Re-imports the Longnose Cab's car parts with its body labels corrected (fix_parts.py: GTI_CV .. GTI_05_CV become
+// LONGNOSECAB_CV ..; the mod's leftovers from the Golf GTI template kept the body from being drawn). Run fix_parts.py first.
+unlock_memory all
+import override GLOBAL\GLOBALB.LZC DBModelParts "..\..\..\..\.superpowers\downloads\cars\3803\fixed\DBModelParts.bin"

@@ -1,0 +1,30 @@
+[VERSN2]
+// Mahindra Thar (our own build: tools/carbuild, Blendswap 31849 by aakash2__2, CC-BY) as a Binarius install. Run
+// build.py first: it writes the parts list, car type and logos into .superpowers\carbuild\thar\package; the model and
+// textures are Part 2's (.superpowers\carbuild\thar\out). The parts list is the Longnose Cab / Tomahawk template with
+// THAR names and THAR_CV labels; the car type is the Tomahawk's (a skinnable racer) named THAR / MAHINDRA; the collision
+// is the Golf GTI's (the game racer closest to the Thar's body size, tools/carbuild/donor.py), copied under THAR because
+// the database names one model for both (MODEL THAR); the logos are bound into the front end's textures as the Chiron
+// package does.
+unlock_memory all
+
+if directory_exists absolute "CARS\THAR"
+do // nothing
+else
+create_folder absolute "CARS\THAR"
+end
+move_file override relative absolute "..\..\..\..\.superpowers\carbuild\thar\out\GEOMETRY.BIN" "CARS\THAR\GEOMETRY.BIN"
+move_file override relative absolute "..\..\..\..\.superpowers\carbuild\thar\out\TEXTURES.BIN" "CARS\THAR\TEXTURES.BIN"
+
+import override GLOBAL\GLOBALB.LZC DBModelParts "..\..\..\..\.superpowers\carbuild\thar\package\DBModelParts.bin"
+import override GLOBAL\GLOBALB.LZC CarTypeInfos "..\..\..\..\.superpowers\carbuild\thar\package\CarTypeInfos.bin"
+copy_collection GLOBAL\GLOBALB.LZC Collisions GTI THAR
+
+if collection_exists FrontEnd\FrontB.lzc TPKBlocks DEFAULT
+do
+update_collection FrontEnd\FrontB.lzc TPKBlocks DEFAULT CollectionName FRONTENDTEXTURES
+else // do nothing
+end
+bind_textures synchronize FrontEnd\FrontB.lzc TPKBlocks FRONTENDTEXTURES "..\..\..\..\.superpowers\carbuild\thar\package\logo"
+
+append strings.end

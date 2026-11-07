@@ -1,0 +1,18 @@
+[VERSN1]
+
+{
+  "Usage": "User",
+  "Game": "MostWanted",
+  "Directory": "",
+  "Endscript": "install.end",
+  "Files": [
+    "GLOBAL\GLOBALB.LZC"
+  ],
+  "Links": [
+    {
+      "LoadType": "Labels",
+      "PathType": "Absolute",
+      "File": "LANGUAGES\Labels.bin"
+    }
+  ]
+}

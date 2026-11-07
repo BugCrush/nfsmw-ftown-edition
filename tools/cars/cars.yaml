@@ -1,0 +1,208 @@
+# What tools/cars/install.py installs for each entry. Paths are relative to the repo root (source) or to the
+# entry's source folder (launcher, base, script, copies); "repo:" makes a copy source relative to the repo root.
+# Every car: frontend UnlockedAt 16 (a career starts at bin 16; UnlockedAt >= the current bin unlocks it in career and
+# Quick Race) and IsCustomizable true (the normal car lists, never the bonus list); its price stays the mod's.
+
+# The Unlimiter's game-file part (its plugin is ours, built from source: companions/unlimiter). Its menus, strings,
+# textures and slot types; its menu camera angles. Not its light-flare values (the Xbox 360 pack's flares stay),
+# not Binarius's SpeedReflect helper, not its dinput8.dll (we keep our ASI loader).
+unlimiter:
+  source: .superpowers/downloads/unlimiter/release
+  binarius:
+    launcher: _NFSMW-Unlimiter-Part1-Binarius.endlauncher
+    base: Binarius
+    script: _Unlimiter-Main.endscript
+    choices:
+      "NFSMW Unlimiter: Please choose what to do.": New Installation
+      "NFSMW Unlimiter: Do you also have Limit Adjuster?": No (Copy dummy skins up to 20)
+    drop:
+      - speedreflect
+      - move_file negate relative absolute "dinput8.dll"
+  vlt:
+    script: _NFSMW-Unlimiter-Part2-VltEd.nfsms
+    skip_classes: [light_flares_cg]
+  copies:
+    - [repo:companions/unlimiter/out/NFSMWUnlimiter.asi, scripts/NFSMWUnlimiter.asi]
+
+# 1971 Dodge Challenger R/T 440 by nlgxzef (nfsmods.xyz/mod/754, Mega folder). Vinyls 1024x (the game's, since
+# 2026-10-31; first installed with 512x).
+challenger71:
+  source: .superpowers/downloads/cars/754/files/1971 Dodge Challenger RT 440
+  binarius:
+    launcher: _CHALLENGER71-Part1-Binary.end
+    base: Binary
+    script: BinaryStuff.end
+    choices:
+      "NFS Most Wanted - 1971 Dodge Challenger R/T 440": Install
+      "Choose your vinyls resolution.": 1024x
+  vlt:
+    script: _CHALLENGER71-Part2-VltEd.nfsms
+    options: {performance: install}
+  frontend: challenger71
+  overrides: {UnlockedAt: 16, IsCustomizable: "True"}
+
+# Fast & Furious Flip Car by Vee-Tec and RisaDriftR (nfsmods.xyz/mod/5194; the archive from sharemods, downloaded by
+# the user). Its script also merges the modder's shared texture pack VEE_MODS (43 MB) into GlobalB.lzc and copies
+# its own UnlimiterData\FLIPCAR.ini. Not Binarius's SpeedReflect helper. Its camera script adds only new entries.
+flipcar:
+  source: .superpowers/downloads/cars/5194/files
+  binarius:
+    launcher: Binary Data Install.end
+    base: Binary Files
+    script: global_install.end
+    drop:
+      - speedreflect
+  vlt:
+    script: VLT Data Install.nfsms
+    options: {setup_rbutton: option1}
+  frontend: flipcar
+  overrides: {UnlockedAt: 16, IsCustomizable: "True"}
+
+# Bugatti Chiron by Eclipse72rus (nfsmods.xyz/mod/697). The mod installs with whole replacement game files or an old GUI
+# tool, so the Binarius part is ours (tools/cars/packages/chiron): before installing, export its car parts and car
+# type from the mod's own GlobalB.lzc (read only, never copied in):
+#   python tools/cars/extract_car.py ".superpowers/downloads/cars/697/files/First mod/GLOBAL/GlobalB.lzc" CHIRON
+#          .superpowers/downloads/cars/697/extracted DBModelParts CarTypeInfos
+# Its collision is the Murcielago's (what its VltEd script leaves it with). Vinyls 512x.
+chiron:
+  source: tools/cars/packages/chiron
+  binarius:
+    launcher: chiron-launcher.end
+    base: .
+    script: install.end
+  vlt:
+    script: ../../../../.superpowers/downloads/cars/697/files/Main files/Chiron.nfsms
+  frontend: chiron
+  overrides: {UnlockedAt: 16, IsCustomizable: "True"}
+
+# Our plugin that keeps the profile loading when cars are added or removed (cars/src; build first with
+# cars\src\build.bat). Must stay installed once the profile has been saved with add-on cars.
+carstable:
+  source: cars
+  copies:
+    - [src/CarStable.asi, scripts/CarStable.asi]
+    - [CarStable.ini, scripts/CarStable.ini]
+
+# 2011 Ford F-150 SVT Raptor by Greger, add-on conversion by ElNico (nfsmods.xyz/mod/1696, v1.2.3, Mega). Vinyls:
+# "1024x High Quality (Xbox360 Vanilla)", matching the Xbox 360 pack's 1024x vinyls in our game.
+raptor:
+  source: .superpowers/downloads/cars/1696/files/Ford F-150 SVT Raptor v1.2.3
+  binarius:
+    launcher: Raptor_BinaryInstall.end
+    base: Move_Files
+    script: InstallRaptor.end
+    choices:
+      "Select the Vinyls that your game is using, or don't install vinyls": "1024x High Quality(Xbox360 Vanilla)"
+    drop:
+      - speedreflect
+  vlt:
+    script: Raptor_Install_VLTED.nfsms
+  frontend: raptor
+  overrides: {UnlockedAt: 16, IsCustomizable: "True"}
+
+# Dodge Tomahawk (a motorcycle) by Riverflo (nfsmods.xyz/mod/5882, v1.0.1). Vinyls 1024x, matching our game.
+tomahawk:
+  source: .superpowers/downloads/cars/5882/files
+  binarius:
+    launcher: Binary Data Install.end
+    base: Binary Files
+    script: global_install.end
+    choices:
+      "Choose Vinyl Resolution": 1024x Vinyl
+    drop:
+      - speedreflect
+  vlt:
+    script: VLT Data Install.nfsms
+    options: {setup_rbutton: option1}
+  frontend: tomahawk
+  overrides: {UnlockedAt: 16, IsCustomizable: "True"}
+
+# Longnose Cab Semi Truck by UndercoverBoy833 (nfsmods.xyz/mod/3803; Burnout 3's truck cab, a racer add-on). The
+# mod's Binary script is broken (copies from a missing CARS\BUS folder, misspells the name string) and overwrites the
+# Unlimiter's manufacturer list, so the Binarius part is ours (tools/cars/packages/longnosecab). Its database script
+# is the mod's: a copy of the Golf GTI, 5000 kg, truck engine sound and cameras. No vinyls (its car type isn't
+# skinnable). Installed straight into the game at the user's request (2026-10-31), no test copy.
+longnosecab:
+  source: tools/cars/packages/longnosecab
+  binarius:
+    launcher: launcher.end
+    base: .
+    script: install.end
+  vlt:
+    script: "../../../../.superpowers/downloads/cars/3803/files/Longnose Cab Semi Truck (Addon)/install longnose cab.nfsms"
+  frontend: longnosecab
+  overrides: {UnlockedAt: 16, IsCustomizable: "True"}
+  copies:
+    - ["repo:.superpowers/downloads/cars/3803/files/Longnose Cab Semi Truck (Addon)/Binary Files/_Main/scripts/UnlimiterData/LONGNOSECAB.ini", scripts/UnlimiterData/LONGNOSECAB.ini]
+
+# Longnose Cab body fix (2026-11-01): re-imports its car parts with the body labels corrected (GTI_CV -> LONGNOSECAB_CV;
+# run tools/cars/packages/longnosecab/fix_parts.py first). Tried 2026-11-01: the body still did not show and the game
+# crashed at the next race load; undone the same day (record longnosecab-parts-fix-20261101-undone). Not installed.
+longnosecab-parts-fix:
+  source: tools/cars/packages/longnosecab
+  binarius:
+    launcher: launcher.end
+    base: .
+    script: fix.end
+
+# Longnose Cab marked skinnable (2026-11-01, the test for its invisible body): a copy of GlobalB.lzc with one byte
+# changed, made by tools/cars/packages/longnosecab/skinnable.py <game> (run it first, on the current file).
+longnosecab-skinnable:
+  source: .superpowers/downloads/cars/3803/fixed
+  copies:
+    - [GlobalB.lzc, GLOBAL/GlobalB.lzc]
+
+# Car builder part 1, Task 7 (2026-11-02): the Challenger's model and textures rewritten by our own builder
+# (tools/carbuild; uncompressed, the game's layout), to prove the game loads files we write. Test copy only.
+carbuild-roundtrip-challenger:
+  source: .superpowers/carbuild/roundtrip/challenger
+  copies:
+    - [GEOMETRY.BIN, CARS/CHALLENGER71/GEOMETRY.BIN]
+    - [TEXTURES.BIN, CARS/CHALLENGER71/TEXTURES.BIN]
+
+# Longnose Cab body kits off (2026-11-01): its model has only KIT00, so random kits 01-05 (the Unlimiter's random parts
+# for opponents) and the menu's kit choice left a truck without a body. The mod's LONGNOSECAB.ini with BodyKits = 0 in
+# [Parts] and [RandomParts] (copy made from the installed file; .superpowers/downloads/cars/3803/fixed).
+longnosecab-bodykits:
+  source: .superpowers/downloads/cars/3803/fixed
+  copies:
+    - [LONGNOSECAB.ini, scripts/UnlimiterData/LONGNOSECAB.ini]
+
+# Longnose Cab tuning (the user, 2026-10-31: as fast as the Raptor, twice as heavy): tools/cars/tuning/longnosecab.nfsms.
+longnosecab-tuning:
+  source: tools/cars/tuning
+  vlt:
+    script: longnosecab.nfsms
+
+# Vinyls switched to 1024x in place (2026-10-31, the user's choice: the game uses the Xbox 360 pack's 1024x vinyls).
+challenger71-vinyls1024:
+  source: .superpowers/downloads/cars/754/files/1971 Dodge Challenger RT 440/Binary
+  copies:
+    - [1024x/CHALLENGER71/VINYLS.BIN, CARS/CHALLENGER71/VINYLS.BIN]
+chiron-vinyls1024:
+  source: .superpowers/downloads/cars/697/files/Main files
+  copies:
+    - [CARS/CHIRON/vinyls.bin, CARS/CHIRON/VINYLS.BIN]
+
+# Raptor tuning (the user's values, 2026-10-31): tools/cars/tuning/raptor.nfsms. Database only; undo with its record.
+raptor-tuning:
+  source: tools/cars/tuning
+  vlt:
+    script: raptor.nfsms
+
+# Mahindra Thar, our own build (car builder parts 1-3; model: Blendswap 31849 by aakash2__2, CC-BY). Run
+# tools/cars/packages/thar/build.py first (parts list, car type and logos into .superpowers/carbuild/thar/package; the
+# model files are Part 2's). Database: tools/carbuild/thar_db.py writes thar.nfsms (the tuned Raptor at 5,000 kg with the
+# user's numbers). The Unlimiter file offers paint and window tint only and no other body kits.
+thar:
+  source: tools/cars/packages/thar
+  binarius:
+    launcher: launcher.end
+    base: .
+    script: install.end
+  vlt:
+    script: thar.nfsms
+  frontend: thar
+  overrides: {UnlockedAt: 16, IsCustomizable: "True"}
+  copies:
+    - [THAR.ini, scripts/UnlimiterData/THAR.ini]

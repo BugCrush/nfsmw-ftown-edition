@@ -1,0 +1,206 @@
+# The add-on cars as the release installer applies them: tools/cars/cars.yaml's entries, in the order the user's game
+# got them (the records in telemetry/cars-records/game chain by each file's before/after sha256: unlimiter, challenger71,
+# flipcar, chiron, raptor, raptor tuning v2, longnosecab, its tuning v1..v6, skinnable, body kits, the 1024x vinyls,
+# thar). Paths are relative to the installer's mirror of the repo layout (release/installer/ftedition/steps.py).
+# Extra keys the installer reads: downloads (download ids copied into the mirror first), prepare (a step run before
+# the install), car_folders (CARS/<name> folders the entry may change), after (entries that must have run).
+
+unlimiter:
+  title: NFSMW Unlimiter (car slots, menus)
+  downloads: [unlimiter]
+  source: .superpowers/downloads/unlimiter/release
+  binarius:
+    launcher: _NFSMW-Unlimiter-Part1-Binarius.endlauncher
+    base: Binarius
+    script: _Unlimiter-Main.endscript
+    choices:
+      "NFSMW Unlimiter: Please choose what to do.": New Installation
+      "NFSMW Unlimiter: Do you also have Limit Adjuster?": No (Copy dummy skins up to 20)
+    drop:
+      - speedreflect
+      - move_file negate relative absolute "dinput8.dll"
+  vlt:
+    script: _NFSMW-Unlimiter-Part2-VltEd.nfsms
+    skip_classes: [light_flares_cg]
+  copies:
+    - [Binarius/scripts/NFSMWUnlimiter.asi, scripts/NFSMWUnlimiter.asi]
+
+challenger71:
+  title: 1971 Dodge Challenger R/T 440
+  downloads: [car_challenger71]
+  after: [unlimiter]
+  car_folders: [CHALLENGER71]
+  source: .superpowers/downloads/cars/754/files/1971 Dodge Challenger RT 440
+  binarius:
+    launcher: _CHALLENGER71-Part1-Binary.end
+    base: Binary
+    script: BinaryStuff.end
+    choices:
+      "NFS Most Wanted - 1971 Dodge Challenger R/T 440": Install
+      "Choose your vinyls resolution.": 1024x
+  vlt:
+    script: _CHALLENGER71-Part2-VltEd.nfsms
+    options: {performance: install}
+  frontend: challenger71
+  overrides: {UnlockedAt: 16, IsCustomizable: "True"}
+
+flipcar:
+  title: Fast & Furious Flip Car
+  downloads: [car_flipcar]
+  after: [unlimiter]
+  car_folders: [FLIPCAR]
+  source: .superpowers/downloads/cars/5194/files
+  binarius:
+    launcher: Binary Data Install.end
+    base: Binary Files
+    script: global_install.end
+    drop:
+      - speedreflect
+  vlt:
+    script: VLT Data Install.nfsms
+    options: {setup_rbutton: option1}
+  frontend: flipcar
+  overrides: {UnlockedAt: 16, IsCustomizable: "True"}
+
+chiron:
+  title: Bugatti Chiron
+  downloads: [car_chiron]
+  after: [unlimiter]
+  prepare: chiron
+  car_folders: [CHIRON]
+  source: tools/cars/packages/chiron
+  binarius:
+    launcher: chiron-launcher.end
+    base: .
+    script: install.end
+  vlt:
+    script: ../../../../.superpowers/downloads/cars/697/files/Main files/Chiron.nfsms
+  frontend: chiron
+  overrides: {UnlockedAt: 16, IsCustomizable: "True"}
+
+raptor:
+  title: Ford F-150 SVT Raptor
+  downloads: [car_raptor]
+  after: [unlimiter]
+  car_folders: [RAPTOR]
+  source: .superpowers/downloads/cars/1696/files/Ford F-150 SVT Raptor v1.2.3
+  binarius:
+    launcher: Raptor_BinaryInstall.end
+    base: Move_Files
+    script: InstallRaptor.end
+    choices:
+      "Select the Vinyls that your game is using, or don't install vinyls": "1024x High Quality(Xbox360 Vanilla)"
+    drop:
+      - speedreflect
+  vlt:
+    script: Raptor_Install_VLTED.nfsms
+  frontend: raptor
+  overrides: {UnlockedAt: 16, IsCustomizable: "True"}
+
+raptor-tuning:
+  title: Ford F-150 SVT Raptor tuning
+  after: [raptor]
+  source: tools/cars/tuning
+  vlt:
+    script: raptor.nfsms
+
+longnosecab:
+  title: Longnose Cab Semi Truck
+  downloads: [car_longnosecab]
+  after: [unlimiter]
+  car_folders: [LONGNOSECAB]
+  source: tools/cars/packages/longnosecab
+  binarius:
+    launcher: launcher.end
+    base: .
+    script: install.end
+  vlt:
+    script: "../../../../.superpowers/downloads/cars/3803/files/Longnose Cab Semi Truck (Addon)/install longnose cab.nfsms"
+  frontend: longnosecab
+  overrides: {UnlockedAt: 16, IsCustomizable: "True"}
+  copies:
+    - ["repo:.superpowers/downloads/cars/3803/files/Longnose Cab Semi Truck (Addon)/Binary Files/_Main/scripts/UnlimiterData/LONGNOSECAB.ini", scripts/UnlimiterData/LONGNOSECAB.ini]
+
+longnosecab-tuning-v1:
+  title: Longnose Cab tuning (1 of 6)
+  after: [longnosecab]
+  source: tools/cars/tuning
+  vlt: {script: longnosecab-v1.nfsms}
+longnosecab-tuning-v2:
+  title: Longnose Cab tuning (2 of 6)
+  after: [longnosecab-tuning-v1]
+  source: tools/cars/tuning
+  vlt: {script: longnosecab-v2.nfsms}
+longnosecab-tuning-v3:
+  title: Longnose Cab tuning (3 of 6)
+  after: [longnosecab-tuning-v2]
+  source: tools/cars/tuning
+  vlt: {script: longnosecab-v3.nfsms}
+longnosecab-tuning-v4:
+  title: Longnose Cab tuning (4 of 6)
+  after: [longnosecab-tuning-v3]
+  source: tools/cars/tuning
+  vlt: {script: longnosecab-v4.nfsms}
+longnosecab-tuning-v5:
+  title: Longnose Cab tuning (5 of 6)
+  after: [longnosecab-tuning-v4]
+  source: tools/cars/tuning
+  vlt: {script: longnosecab-v5.nfsms}
+longnosecab-tuning-v6:
+  title: Longnose Cab tuning (6 of 6)
+  after: [longnosecab-tuning-v5]
+  source: tools/cars/tuning
+  vlt: {script: longnosecab-v6.nfsms}
+
+longnosecab-skinnable:
+  title: Longnose Cab marked skinnable
+  after: [longnosecab]
+  prepare: longnosecab-skinnable
+  source: .superpowers/downloads/cars/3803/fixed
+  copies:
+    - [GlobalB.lzc, GLOBAL/GlobalB.lzc]
+
+longnosecab-bodykits:
+  title: Longnose Cab body kits off
+  downloads: [car_longnosecab]
+  after: [longnosecab]
+  prepare: longnosecab-bodykits
+  source: .superpowers/downloads/cars/3803/fixed
+  copies:
+    - [LONGNOSECAB.ini, scripts/UnlimiterData/LONGNOSECAB.ini]
+
+challenger71-vinyls1024:
+  title: 1971 Challenger 1024x vinyls
+  downloads: [car_challenger71]
+  after: [challenger71]
+  car_folders: [CHALLENGER71]
+  source: .superpowers/downloads/cars/754/files/1971 Dodge Challenger RT 440/Binary
+  copies:
+    - [1024x/CHALLENGER71/VINYLS.BIN, CARS/CHALLENGER71/VINYLS.BIN]
+
+chiron-vinyls1024:
+  title: Bugatti Chiron 1024x vinyls
+  downloads: [car_chiron]
+  after: [chiron]
+  car_folders: [CHIRON]
+  source: .superpowers/downloads/cars/697/files/Main files
+  copies:
+    - [CARS/CHIRON/vinyls.bin, CARS/CHIRON/VINYLS.BIN]
+
+thar:
+  title: Mahindra Thar (built on your machine)
+  downloads: [car_longnosecab, car_tomahawk]
+  after: [unlimiter]
+  prepare: thar
+  car_folders: [THAR]
+  source: tools/cars/packages/thar
+  binarius:
+    launcher: launcher.end
+    base: .
+    script: install.end
+  vlt:
+    script: thar.nfsms
+  frontend: thar
+  overrides: {UnlockedAt: 16, IsCustomizable: "True"}
+  copies:
+    - [THAR.ini, scripts/UnlimiterData/THAR.ini]

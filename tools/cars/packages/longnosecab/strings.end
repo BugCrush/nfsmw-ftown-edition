@@ -1,0 +1,98 @@
+[VERSN2]
+// The car's name in every language file (and its label in Labels.bin), as the Challenger mod does.
+
+if file_exists absolute Languages\Danish.bin
+do
+new negate Languages\Danish.bin
+add_or_update_string Languages\Danish.bin STRBlocks GLOBAL AUTO CARNAME_GENERIC_LONGNOSECAB "Longnose Cab Semi Truck"
+delete Languages\Danish.bin
+else // do nothing
+end
+
+if file_exists absolute Languages\Dutch.bin
+do
+new negate Languages\Dutch.bin
+add_or_update_string Languages\Dutch.bin STRBlocks GLOBAL AUTO CARNAME_GENERIC_LONGNOSECAB "Longnose Cab Semi Truck"
+delete Languages\Dutch.bin
+else // do nothing
+end
+
+if file_exists absolute Languages\English.bin
+do
+new negate Languages\English.bin
+add_or_update_string Languages\English.bin STRBlocks GLOBAL AUTO CARNAME_GENERIC_LONGNOSECAB "Longnose Cab Semi Truck"
+delete Languages\English.bin
+else // do nothing
+end
+
+if file_exists absolute Languages\Finnish.bin
+do
+new negate Languages\Finnish.bin
+add_or_update_string Languages\Finnish.bin STRBlocks GLOBAL AUTO CARNAME_GENERIC_LONGNOSECAB "Longnose Cab Semi Truck"
+delete Languages\Finnish.bin
+else // do nothing
+end
+
+if file_exists absolute Languages\French.bin
+do
+new negate Languages\French.bin
+add_or_update_string Languages\French.bin STRBlocks GLOBAL AUTO CARNAME_GENERIC_LONGNOSECAB "Longnose Cab Semi Truck"
+delete Languages\French.bin
+else // do nothing
+end
+
+if file_exists absolute Languages\German.bin
+do
+new negate Languages\German.bin
+add_or_update_string Languages\German.bin STRBlocks GLOBAL AUTO CARNAME_GENERIC_LONGNOSECAB "Longnose Cab Semi Truck"
+delete Languages\German.bin
+else // do nothing
+end
+
+if file_exists absolute Languages\Italian.bin
+do
+new negate Languages\Italian.bin
+add_or_update_string Languages\Italian.bin STRBlocks GLOBAL AUTO CARNAME_GENERIC_LONGNOSECAB "Longnose Cab Semi Truck"
+delete Languages\Italian.bin
+else // do nothing
+end
+
+if file_exists absolute Languages\Largest.bin
+do
+new negate Languages\Largest.bin
+add_or_update_string Languages\Largest.bin STRBlocks GLOBAL AUTO CARNAME_GENERIC_LONGNOSECAB "Longnose Cab Semi Truck"
+delete Languages\Largest.bin
+else // do nothing
+end
+
+if file_exists absolute Languages\Polish.bin
+do
+new negate Languages\Polish.bin
+add_or_update_string Languages\Polish.bin STRBlocks GLOBAL AUTO CARNAME_GENERIC_LONGNOSECAB "Longnose Cab Semi Truck"
+delete Languages\Polish.bin
+else // do nothing
+end
+
+if file_exists absolute Languages\Spanish.bin
+do
+new negate Languages\Spanish.bin
+add_or_update_string Languages\Spanish.bin STRBlocks GLOBAL AUTO CARNAME_GENERIC_LONGNOSECAB "Longnose Cab Semi Truck"
+delete Languages\Spanish.bin
+else // do nothing
+end
+
+if file_exists absolute Languages\Swedish.bin
+do
+new negate Languages\Swedish.bin
+add_or_update_string Languages\Swedish.bin STRBlocks GLOBAL AUTO CARNAME_GENERIC_LONGNOSECAB "Longnose Cab Semi Truck"
+delete Languages\Swedish.bin
+else // do nothing
+end
+
+if file_exists absolute Languages\Labels.bin
+do
+new negate Languages\Labels.bin
+add_or_update_string Languages\Labels.bin STRBlocks GLOBAL AUTO CARNAME_GENERIC_LONGNOSECAB "CARNAME_GENERIC_LONGNOSECAB"
+delete Languages\Labels.bin
+else // do nothing
+end

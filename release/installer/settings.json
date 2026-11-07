@@ -1,0 +1,13 @@
+{
+ "scripts/X360Stuff.ini": {
+  "MISC": {"MiddleGrayValue": "0.17"}
+ },
+ "scripts/NFSMostWanted.WidescreenFix.ini": {
+  "_default": "builds/NFSMostWanted.WidescreenFix.ini",
+  "MAIN": {"ResX": "1920", "ResY": "1080", "FixHUD": "0", "FMVWidescreenMode": "0", "HUDWidescreenMode": "0"},
+  "MISC": {"ImproveGamepadSupport": "1"},
+  "GRAPHICS": {"ShadowsRes": "4096", "ImproveShadowLOD": "0", "ShadowMapTextureFormat": "1", "ConsoleGamma": "0",
+               "SMAA": "0", "HideAABug": "0"},
+  "CAMERA": {"Enable": "0"}
+ }
+}
