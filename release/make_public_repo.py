@@ -118,11 +118,6 @@ def main():
     for name in sorted(os.listdir(os.path.join(HERE, "public", "screenshots"))):
         shutil.copyfile(os.path.join(HERE, "public", "screenshots", name), os.path.join(OUT, "screenshots", name))
         files.append("screenshots/" + name)
-    # the trailer (the user's edit, 2026-11-08; re-encoded without its file metadata) and its poster frame
-    os.makedirs(os.path.join(OUT, "media"), exist_ok=True)
-    for name in sorted(os.listdir(os.path.join(HERE, "public", "media"))):
-        shutil.copyfile(os.path.join(HERE, "public", "media", name), os.path.join(OUT, "media", name))
-        files.append("media/" + name)
     hits = build_package.forbidden_hits(OUT, check_names=False)  # source: diagnostics' sources may be public
     listing = sorted(files)
     with open(os.path.join(OUT, "FILELIST.txt"), "w", encoding="utf-8", newline="\n") as f:

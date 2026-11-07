@@ -15,7 +15,7 @@ player's own downloads of other authors' mods, pinned by SHA-256 to their offici
 
 https://github.com/user-attachments/assets/4289ab82-6351-4356-9999-4f2596b3e8d5
 
-*Quality Reduced for GitHub
+*Quality reduced for GitHub.*
 
 ## The parts
 
